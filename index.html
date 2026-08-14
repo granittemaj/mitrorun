@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MitroRun 2026 — Vrapimi i qytetit të Mitrovicës</title>
+<meta name="description" content="MitroRun. 2K për fëmijë, 5K dhe 10K për të rritur. 4 tetor 2026, Sheshi Adem Jashari, Mitrovicë.">
+<meta name="theme-color" content="#0A0B0A">
+<link rel="preload" href="assets/fonts/archivo-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<link rel="canonical" href="https://mitrorun.com/">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sq_AL">
+<meta property="og:site_name" content="MitroRun">
+<meta property="og:url" content="https://mitrorun.com/">
+<meta property="og:title" content="MitroRun 2026 — Vrapimi i qytetit të Mitrovicës">
+<meta property="og:description" content="2K për fëmijë, 5K dhe 10K për të rritur. 4 tetor 2026, Sheshi Adem Jashari, Mitrovicë.">
+<meta property="og:image" content="https://mitrorun.com/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MitroRun 2026 — Vrapimi i qytetit të Mitrovicës">
+<meta name="twitter:description" content="2K për fëmijë, 5K dhe 10K për të rritur. 4 tetor 2026, Sheshi Adem Jashari, Mitrovicë.">
+<meta name="twitter:image" content="https://mitrorun.com/assets/img/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": "MitroRun 2026",
+  "description": "Vrapimi i qytetit të Mitrovicës. 2K për fëmijë, 5K dhe 10K për të rritur.",
+  "startDate": "2026-10-04T10:00:00+02:00",
+  "endDate": "2026-10-04T15:00:00+02:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "Sheshi Adem Jashari",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mitrovicë",
+      "addressCountry": "XK"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.8901, "longitude": 20.8672 }
+  },
+  "organizer": [
+    { "@type": "Organization", "name": "7ARTE" },
+    { "@type": "SportsOrganization", "name": "MitRun" }
+  ],
+  "offers": [
+    { "@type": "Offer", "name": "10K Liqeni", "price": "20", "priceCurrency": "EUR", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "name": "5K Lumi", "price": "15", "priceCurrency": "EUR", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "name": "2K Shotat", "price": "0", "priceCurrency": "EUR", "availability": "https://schema.org/PreOrder" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header id="hd">
+  <a class="logo" href="#top"><span class="d"></span>MitroRun</a>
+  <nav class="main" id="nv">
+    <a href="#garat">Garat</a><a href="#itinerari">Itinerari</a><a href="#rreth">Rreth</a>
+    <a href="#mitrovica">Mitrovica</a><a href="#faq">FAQ</a>
+  </nav>
+  <div class="hd-right">
+    <div class="lang"><b>SQ</b><span>EN</span><span>SR</span></div>
+    <a class="btn sm" href="#regjistrohu">Regjistrohu</a>
+    <button class="burger" id="bg" aria-label="Menyja" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<div id="menu">
+  <ul>
+    <li><a href="#garat">Garat</a></li><li><a href="#itinerari">Itinerari</a></li>
+    <li><a href="#rreth">Rreth MitroRun</a></li><li><a href="#mitrovica">Zbulo Mitrovicën</a></li>
+    <li><a href="#programi">Pakoja &amp; Programi</a></li><li><a href="#faq">Pyetje të shpeshta</a></li>
+  </ul>
+  <div class="mf lbl on-dark"><span>04.10.2026</span><span>Sheshi Adem Jashari</span><span>Mitrovicë</span></div>
+</div>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div id="heroMap" aria-hidden="true"></div>
+
+  <div class="bands" aria-hidden="true">
+    <div class="band b1">
+      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
+      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
+    </div>
+    <div class="band b2">
+      <div><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span></div>
+      <div><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span></div>
+    </div>
+    <div class="band b3">
+      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
+      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
+    </div>
+  </div>
+
+  <div class="hero-veil"></div>
+
+  <div class="hero-in">
+    <a class="logo" href="#top"><span class="d"></span>MitroRun</a>
+    <h1 class="tagline">Një qytet.<br>Tri distanca.<br><span>Një ditë.</span></h1>
+    <div class="hero-meta">
+      <span>04.10.2026</span><span>Sheshi Adem Jashari</span><span>Regjistrim online</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn" href="#regjistrohu">Regjistrohu online <span class="ar">→</span></a>
+      <a class="btn ghost-d" href="#itinerari">Shiko itinerarin</a>
+    </div>
+    <div class="hero-cd">
+      <div><b id="cd-d">--</b><span>Ditë</span></div>
+      <div><b id="cd-h">--</b><span>Orë</span></div>
+      <div><b id="cd-m">--</b><span>Min</span></div>
+      <div><b id="cd-s">--</b><span>Sek</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FACT BAR ===================== -->
+<div class="bar">
+  <div class="wrap">
+    <div><b>10K</b><span>Liqeni · 11:00 · 20 €</span></div>
+    <div><b>5K</b><span>Lumi · 11:00 · 15 €</span></div>
+    <div><b>2K</b><span>Shotat · 10:00 · Falas</span></div>
+    <div><b>~20 m</b><span>Denivelacioni total</span></div>
+  </div>
+</div>
+
+<!-- ===================== GARAT ===================== -->
+<section id="garat" class="races">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">01</span>Garat</span><span class="rule"></span></div>
+      <h2 class="h-lg">Një qytet. Tri distanca.</h2>
+      <p>Të gjitha itineraret janë të rrafshëta dhe zhvillohen në hapësirën urbane. Zgjidh distancën që të përshtatet dhe vrapo me ritmin tënd.</p>
+    </div>
+    <div class="cards">
+      <article class="card rv">
+        <div class="top"><span class="idx">01</span><span class="tag">Gara kryesore</span></div>
+        <div><div class="big">10K</div><div class="nm">Liqeni</div></div>
+        <p>Për vrapues rekreativë dhe garues me përvojë, por e arritshme edhe për ata që e provojnë për herë të parë.</p>
+        <dl><div><dt>Ora</dt><dd>11:00</dd></div><div><dt>Çmimi</dt><dd>20 €</dd></div></dl>
+        <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+      </article>
+      <article class="card rv">
+        <div class="top"><span class="idx">02</span><span class="tag">Fillestarë</span></div>
+        <div><div class="big">5K</div><div class="nm">Lumi</div></div>
+        <p>Zgjedhja ideale për fillestarët dhe të gjithë ata që duan ta përjetojnë MitroRun pa presion.</p>
+        <dl><div><dt>Ora</dt><dd>11:00</dd></div><div><dt>Çmimi</dt><dd>15 €</dd></div></dl>
+        <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+      </article>
+      <article class="card rv">
+        <div class="top"><span class="idx">03</span><span class="tag">Fëmijë 7–14</span></div>
+        <div><div class="big">2K</div><div class="nm">Shotat</div></div>
+        <p>E shkurtër, e sigurt dhe plot energji. Fëmijët vrapojnë në qytetin e tyre dhe e kalojnë vijën e finishit me krenari.</p>
+        <dl><div><dt>Ora</dt><dd>10:00</dd></div><div><dt>Çmimi</dt><dd>Falas</dd></div></dl>
+        <a class="go" href="#regjistrohu">Regjistro fëmijën <span class="ar">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ITINERARI ===================== -->
+<section id="itinerari" class="course">
+  <div class="wrap">
+    <div class="head on-dark rv">
+      <div class="top"><span class="lbl on-dark"><span class="n">02</span>Itinerari</span><span class="rule"></span></div>
+      <h2 class="h-lg">Qyteti është pista.</h2>
+      <p>Nisja dhe finishi te Sheshi Adem Jashari. Itineraret kalojnë përgjatë Ibrit dhe qendrës së qytetit.</p>
+    </div>
+
+    <div class="course-grid">
+      <div class="rv">
+        <div class="tabs" id="tabs">
+          <button class="tab on" data-r="10">10K Liqeni</button>
+          <button class="tab" data-r="5">5K Lumi</button>
+          <button class="tab" data-r="2">2K Shotat</button>
+        </div>
+
+        <dl class="course-facts">
+          <div><dt>Distanca</dt><dd id="f-dist">10 km</dd></div>
+          <div><dt>Nisja</dt><dd id="f-time">11:00</dd></div>
+          <div><dt>Denivelacioni</dt><dd id="f-elev">~20 m</dd></div>
+          <div><dt>Çmimi</dt><dd id="f-price">20 €</dd></div>
+        </dl>
+
+        <div class="elev">
+          <p class="lbl on-dark" style="margin-bottom:.7rem">Profili i lartësisë</p>
+          <svg viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true">
+            <path class="elev-fill" d="M0 52 L60 48 L130 54 L200 44 L270 50 L340 42 L410 49 L480 45 L540 51 L600 47 L600 70 L0 70Z"/>
+            <path class="elev-line" d="M0 52 L60 48 L130 54 L200 44 L270 50 L340 42 L410 49 L480 45 L540 51 L600 47"/>
+          </svg>
+        </div>
+
+        <div class="pace">
+          <p class="lbl on-dark" style="margin-bottom:1rem">Sa shpejt do ta mbarosh?</p>
+          <div class="row">
+            <output id="p-time">55:00</output>
+            <output id="p-pace" style="font-size:1rem;font-weight:700;color:var(--green)">5:30 <small>min/km</small></output>
+          </div>
+          <input type="range" id="p-range" min="240" max="480" step="5" value="330" aria-label="Ritmi për kilometër">
+          <div class="row" style="margin:.7rem 0 0"><span class="lbl on-dark">4:00 min/km</span><span class="lbl on-dark">8:00 min/km</span></div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="panel">
+          <div class="panel-top">
+            <div class="who">
+              <span class="chip" id="m-chip">10K Liqeni</span>
+              <span class="where">Mitrovicë · Kosovë</span>
+            </div>
+            <a class="btn xs ghost-d" href="#">Shkarko GPX</a>
+          </div>
+
+          <div class="panel-map"><div id="courseMap"></div></div>
+
+          <div class="panel-legend">
+            <span><i class="s"></i>Start / Finish</span>
+            <span><i class="k"></i>Shenja kilometrike</span>
+            <span><i class="r"></i>Itinerari</span>
+            <span class="panel-note">Skicë · versioni final pas miratimit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STRIP ===================== -->
+<div class="strip" aria-hidden="true">
+  <div class="tr">
+    <div><b>04.10.2026</b><i>◆</i><b>2K Shotat</b><i>◆</i><b>5K Lumi</b><i>◆</i><b>10K Liqeni</b><i>◆</i><b>Sheshi Adem Jashari</b><i>◆</i><b>Rock &amp; DJ</b><i>◆</i></div>
+    <div><b>04.10.2026</b><i>◆</i><b>2K Shotat</b><i>◆</i><b>5K Lumi</b><i>◆</i><b>10K Liqeni</b><i>◆</i><b>Sheshi Adem Jashari</b><i>◆</i><b>Rock &amp; DJ</b><i>◆</i></div>
+  </div>
+</div>
+
+<!-- ===================== RRETH ===================== -->
+<section id="rreth">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">03</span>Rreth MitroRun</span><span class="rule"></span></div>
+    </div>
+    <div class="about">
+      <p class="lede rv">Në qendër është vrapimi. Por MitroRun është një fundjavë që e nxjerr qytetin në lëvizje.</p>
+      <div class="about-body rv">
+        <p>MitroRun synon të bëhet ngjarja kryesore sportive e Mitrovicës dhe një pikë takimi e përvitshme për vrapues, familje, të rinj, biznese dhe vizitorë nga Kosova e rajoni.</p>
+        <p>Garat zhvillohen në shtigje të rrafshëta nëpër qytet. Kjo i bën ato të përshtatshme si për ata që vrapojnë për herë të parë, ashtu edhe për vrapuesit që kërkojnë ritëm dhe rezultat personal.</p>
+      </div>
+    </div>
+    <div class="stats rv">
+      <div><b data-count="2000" data-suffix="+">0</b><span>Pjesëmarrës të synuar</span></div>
+      <div><b data-count="1000">0</b><span>Fëmijë në 2K</span></div>
+      <div><b data-count="3">0</b><span>Distanca</span></div>
+      <div><b data-count="17">0</b><span>Kilometra rrugë të mbyllura</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MITROVICA ===================== -->
+<section id="mitrovica">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">04</span>Zbulo Mitrovicën</span><span class="rule"></span></div>
+    </div>
+    <div class="disc-grid">
+      <div class="rv">
+        <h2 class="h-lg">Shihe fytyrën e re.<br>Rilidhu me të kaluarën.</h2>
+        <p class="mut" style="margin-top:1.6rem">Qyteti po ndryshon. Hapësira të reja, energjia e të rinjve, arti, muzika dhe bizneset lokale po krijojnë një fytyrë të re të Mitrovicës. Në të njëjtën kohë, historia dhe trashëgimia e saj mbeten pjesë e identitetit të qytetit.</p>
+        <p class="mut">Eja për garën dhe qëndro më gjatë. Ec nëpër qytet, zbulo kulturën lokale, tako njerëzit dhe shijo ushqimin.</p>
+        <p style="margin-top:2rem"><a class="btn ghost" href="#">Planifiko vizitën</a></p>
+      </div>
+      <div class="plates">
+        <figure class="plate">
+          <svg viewBox="0 0 400 130" aria-hidden="true">
+            <path class="pl-l" d="M20 106h360M56 106V72M116 106V64M200 106V54M284 106V64M344 106V72"/>
+            <path class="pl-a" d="M20 74C70 40 140 24 200 24s130 16 180 50"/>
+            <path class="pl-l" d="M20 118c22-8 44-8 66 0s44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0" opacity=".35"/>
+          </svg>
+          <b>Ura mbi Ibër</b><span>Pika ku qyteti takohet me vetveten.</span>
+        </figure>
+        <figure class="plate">
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <path class="pl-l" d="M40 132h120M70 132V56h60v76M70 92h60"/>
+            <path class="pl-a" d="M100 56V26M78 40l44-14M122 40L78 26"/>
+            <circle class="pl-l" cx="100" cy="20" r="9"/>
+          </svg>
+          <b>Trepça</b><span>Trashëgimia që e ndërtoi qytetin.</span>
+        </figure>
+        <figure class="plate">
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <path class="pl-l" d="M16 122h168"/>
+            <path class="pl-a" d="M16 122l44-56 30 34 26-44 34 42 34-24"/>
+            <circle class="pl-l" cx="150" cy="42" r="12"/>
+          </svg>
+          <b>Bjeshkët e Bajgorës</b><span>Njëzet minuta nga vija e finishit.</span>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAKOJA + PROGRAMI ===================== -->
+<section id="programi" class="races">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">05</span>Pakoja &amp; Programi</span><span class="rule"></span></div>
+      <p>Përmbajtja përfundimtare e pakos konfirmohet para hapjes së regjistrimit.</p>
+    </div>
+    <div class="two">
+      <div class="rv">
+        <h3 class="h-md" style="margin-bottom:1.4rem">Pakoja e vrapuesit</h3>
+        <ul class="list">
+          <li>Numri zyrtar i garuesit</li>
+          <li>Çipi i matjes së kohës, nëse përdoret për distancën përkatëse</li>
+          <li>Fanella zyrtare e MitroRun</li>
+          <li>Udhëzuesi me orarin, itinerarin dhe rregullat</li>
+          <li>Dhurata nga partnerët e ngjarjes</li>
+          <li>Medalja e përfundimit, uji dhe fotografitë profesionale</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <h3 class="h-md" style="margin-bottom:1.4rem">Programi</h3>
+        <ol class="plist">
+          <li><div><b>Rock Live</b><span>Së paku dy performanca live nga grupe rock</span></div></li>
+          <li><div><b>DJ Set</b><span>Dy performanca nga DJ gjatë fundjavës</span></div></li>
+          <li><div><b>Identiteti lokal</b><span>Aktivitete kulturore dhe prezantime të qytetit</span></div></li>
+          <li><div><b>Tregu i prodhuesve</b><span>Hapësira për artizanë dhe biznese vendore</span></div></li>
+          <li><div><b>Zona familjare</b><span>Aktivitete për familje, fëmijë dhe vizitorë</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ORGANIZATORËT ===================== -->
+<section id="organizatoret">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">06</span>Organizatorët</span><span class="rule"></span></div>
+    </div>
+    <div class="orgs">
+      <div class="org rv"><b>7ARTE</b><p>Sjell përvojën në kulturë, aktivizim qytetar dhe organizim të ngjarjeve në Mitrovicë.</p></div>
+      <div class="org rv"><b>MitRun</b><p>Klubi i vrapimit që sjell njohjen e komunitetit të vrapimit dhe përvojën sportive.</p></div>
+      <div class="org rv"><b>Së bashku</b><p>Një garë e sigurt dhe e qëndrueshme, në bashkëpunim me institucionet, vullnetarët, bizneset dhe mediat.</p></div>
+    </div>
+    <p class="lbl rv" style="margin:2.8rem 0 0">Partnerët</p>
+    <div class="partners rv">
+      <div class="partner">PARTNER 01</div><div class="partner">PARTNER 02</div><div class="partner">PARTNER 03</div>
+      <div class="partner">PARTNER 04</div><div class="partner">PARTNER 05</div><div class="partner">PARTNER 06</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="races">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">07</span>Pyetje të shpeshta</span><span class="rule"></span></div>
+    </div>
+    <div class="faq rv">
+      <details open><summary>Si regjistrohem? <span class="pm"></span></summary><div class="ans">Regjistrimi bëhet plotësisht online. Zgjidh distancën, plotëso të dhënat dhe përfundo pagesën për ta siguruar vendin tënd. Konfirmimin e pranon me email.</div></details>
+      <details><summary>Cilën distancë duhet të zgjedh? <span class="pm"></span></summary><div class="ans">2K është për fëmijë. 5K është ideale për fillestarë dhe vrapues rekreativë. 10K është për ata që kërkojnë një sfidë më të gjatë.</div></details>
+      <details><summary>A janë itineraret të vështira? <span class="pm"></span></summary><div class="ans">Jo. Të tri garat zhvillohen në itinerare të rrafshëta urbane, me denivelacion rreth 20 metra.</div></details>
+      <details><summary>Ku merret pakoja e vrapuesit? <span class="pm"></span></summary><div class="ans">Sheshi Adem Jashari. Data dhe orari i tërheqjes njoftohen para garës.</div></details>
+      <details><summary>A mund të vij edhe nëse nuk vrapoj? <span class="pm"></span></summary><div class="ans">Po. MitroRun është një ngjarje për gjithë qytetin, me muzikë, aktivitete dhe hapësira për biznese e prodhues lokalë.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section id="regjistrohu" class="cta">
+  <div class="cta-map" aria-hidden="true">
+    <svg viewBox="0 0 600 300" fill="none">
+      <path d="M40 240C120 200 160 120 260 110S420 170 500 120 560 60 580 50" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 16"/>
+      <circle cx="40" cy="240" r="10" fill="#fff"/><circle cx="580" cy="50" r="10" fill="#fff"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <p class="lbl" style="color:rgba(255,255,255,.82);margin-bottom:1.2rem">Vendet janë të kufizuara</p>
+    <h2 class="h-xl">Vrapo në zemër<br>të Mitrovicës</h2>
+    <p>Zgjidh distancën, plotëso të dhënat dhe përfundo pagesën. Fillo përgatitjet sot.</p>
+    <a class="btn" href="#">Regjistrohu tani <span class="ar">→</span></a>
+  </div>
+</section>
+
+<!-- ===================== NEWSLETTER ===================== -->
+<section>
+  <div class="wrap news">
+    <div class="rv">
+      <h3 class="h-md">Qëndro në hap me MitroRun</h3>
+      <p class="mut" style="margin-top:.8rem">Merr njoftimet për regjistrimin, itineraret, programin dhe përgatitjet për garë.</p>
+    </div>
+    <div class="rv">
+      <div class="field">
+        <input type="email" placeholder="Adresa e emailit" aria-label="Adresa e emailit">
+        <button class="btn sm" type="button">Abonohu</button>
+      </div>
+      <p class="lbl" style="margin-top:.9rem;letter-spacing:.1em">Pa spam. Vetëm njoftimet e garës.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top" style="margin-bottom:1.1rem"><span class="d"></span>MitroRun</a>
+        <p style="color:rgba(255,255,255,.6);max-width:32ch">Vrapimi i qytetit të Mitrovicës. Organizuar nga 7ARTE dhe klubi i vrapimit MitRun.</p>
+      </div>
+      <div><h4>Garat</h4><ul><li><a href="#garat">10K Liqeni</a></li><li><a href="#garat">5K Lumi</a></li><li><a href="#garat">2K Shotat</a></li><li><a href="#itinerari">Itinerari</a></li></ul></div>
+      <div><h4>Për vrapuesit</h4><ul><li><a href="#">Lista e nisjes</a></li><li><a href="#">Tërheqja e pakos</a></li><li><a href="#">Rregullat</a></li><li><a href="#">Rezultatet</a></li></ul></div>
+      <div><h4>Kontakt</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">hello@mitrorun.com</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 MitroRun</span><span>Mitrovicë, Kosovë</span><span>Kushtet</span><span>Privatësia</span>
+      <span style="margin-left:auto">PAPINGU</span>
+    </div>
+  </div>
+</footer>
+
+<div id="stick">
+  <div class="t"><b>04.10.2026</b>Sheshi Adem Jashari</div>
+  <a class="btn sm" href="#regjistrohu">Regjistrohu</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
