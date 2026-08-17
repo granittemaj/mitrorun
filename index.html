@@ -6,6 +6,7 @@
 <title>MitroRun 2026 — Vrapimi i qytetit të Mitrovicës</title>
 <meta name="description" content="MitroRun. 2K për fëmijë, 5K dhe 10K për të rritur. 4 tetor 2026, Sheshi Adem Jashari, Mitrovicë.">
 <meta name="theme-color" content="#0A0B0A">
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -65,21 +66,22 @@
 
 <header id="hd">
   <a class="logo" href="#top"><span class="d"></span>MitroRun</a>
-  <nav class="main" id="nv">
-    <a href="#garat">Garat</a><a href="#itinerari">Itinerari</a><a href="#rreth">Rreth</a>
-    <a href="#mitrovica">Mitrovica</a><a href="#faq">FAQ</a>
+  <nav class="main" id="nv" aria-label="Menyja kryesore">
+    <a href="#garat">Garat</a><a href="#itinerari">Itinerari</a><a href="#galeria">Galeria</a>
+    <a href="#rreth">Rreth</a><a href="#faq">FAQ</a>
   </nav>
   <div class="hd-right">
     <div class="lang"><b>SQ</b><span>EN</span><span>SR</span></div>
     <a class="btn sm" href="#regjistrohu">Regjistrohu</a>
-    <button class="burger" id="bg" aria-label="Menyja" aria-expanded="false"><i></i><i></i><i></i></button>
+    <button class="burger" id="bg" aria-label="Menyja" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
   </div>
 </header>
 
 <div id="menu">
   <ul>
     <li><a href="#garat">Garat</a></li><li><a href="#itinerari">Itinerari</a></li>
-    <li><a href="#rreth">Rreth MitroRun</a></li><li><a href="#mitrovica">Zbulo Mitrovicën</a></li>
+    <li><a href="#galeria">Galeria</a></li><li><a href="#rreth">Rreth MitroRun</a></li>
+    <li><a href="#mitrovica">Zbulo Mitrovicën</a></li>
     <li><a href="#programi">Pakoja &amp; Programi</a></li><li><a href="#faq">Pyetje të shpeshta</a></li>
   </ul>
   <div class="mf lbl on-dark"><span>04.10.2026</span><span>Sheshi Adem Jashari</span><span>Mitrovicë</span></div>
@@ -89,20 +91,24 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <div id="heroMap" aria-hidden="true"></div>
+  <div class="hero-photo">
+    <img src="https://images.pexels.com/photos/29840332/pexels-photo-29840332.jpeg?auto=compress&cs=tinysrgb&w=1920"
+         alt="Vrapues gjatë një gare në qytet" fetchpriority="high" width="1920" height="1280">
+  </div>
+  <div class="hero-tint"></div>
 
   <div class="bands" aria-hidden="true">
     <div class="band b1">
-      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
-      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
+      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
+      <div><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span><span>MITROVICË</span></div>
     </div>
     <div class="band b2">
       <div><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span></div>
       <div><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span><span>04.10.26</span></div>
     </div>
     <div class="band b3">
-      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
-      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
+      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
+      <div><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span><span>10K · 5K · 2K</span></div>
     </div>
   </div>
 
@@ -131,7 +137,7 @@
 <div class="bar">
   <div class="wrap">
     <div><b>10K</b><span>Liqeni · 11:00 · 20 €</span></div>
-    <div><b>5K</b><span>Lumi · 11:00 · 15 €</span></div>
+    <div><b>5K</b><span>Lumi · 11:30 · 15 €</span></div>
     <div><b>2K</b><span>Shotat · 10:00 · Falas</span></div>
     <div><b>~20 m</b><span>Denivelacioni total</span></div>
   </div>
@@ -147,56 +153,89 @@
     </div>
     <div class="cards">
       <article class="card rv">
-        <div class="top"><span class="idx">01</span><span class="tag">Gara kryesore</span></div>
-        <div><div class="big">10K</div><div class="nm">Liqeni</div></div>
-        <p>Për vrapues rekreativë dhe garues me përvojë, por e arritshme edhe për ata që e provojnë për herë të parë.</p>
-        <dl><div><dt>Ora</dt><dd>11:00</dd></div><div><dt>Çmimi</dt><dd>20 €</dd></div></dl>
-        <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+        <figure class="thumb ph">
+          <span class="badge">Gara kryesore</span>
+          <img loading="lazy" decoding="async" alt="10K Liqeni"
+               src="https://images.pexels.com/photos/29840326/pexels-photo-29840326.jpeg?auto=compress&cs=tinysrgb&w=1200">
+        </figure>
+        <div class="body">
+          <div class="top"><span class="idx">01</span><span class="tag">Rekreativë &amp; garues</span></div>
+          <div><div class="big">10K</div><div class="nm">Liqeni</div></div>
+          <p>Për vrapues rekreativë dhe garues me përvojë, por e arritshme edhe për ata që e provojnë për herë të parë.</p>
+          <dl><div><dt>Ora</dt><dd>11:00</dd></div><div><dt>Çmimi</dt><dd>20 €</dd></div></dl>
+          <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+        </div>
       </article>
       <article class="card rv">
-        <div class="top"><span class="idx">02</span><span class="tag">Fillestarë</span></div>
-        <div><div class="big">5K</div><div class="nm">Lumi</div></div>
-        <p>Zgjedhja ideale për fillestarët dhe të gjithë ata që duan ta përjetojnë MitroRun pa presion.</p>
-        <dl><div><dt>Ora</dt><dd>11:00</dd></div><div><dt>Çmimi</dt><dd>15 €</dd></div></dl>
-        <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+        <figure class="thumb ph">
+          <span class="badge">Fillestarë</span>
+          <img loading="lazy" decoding="async" alt="5K Lumi"
+               src="https://images.pexels.com/photos/29840331/pexels-photo-29840331.jpeg?auto=compress&cs=tinysrgb&w=1200">
+        </figure>
+        <div class="body">
+          <div class="top"><span class="idx">02</span><span class="tag">Fillestarë</span></div>
+          <div><div class="big">5K</div><div class="nm">Lumi</div></div>
+          <p>Zgjedhja ideale për fillestarët dhe të gjithë ata që duan ta përjetojnë MitroRun pa presion.</p>
+          <dl><div><dt>Ora</dt><dd>11:30</dd></div><div><dt>Çmimi</dt><dd>15 €</dd></div></dl>
+          <a class="go" href="#regjistrohu">Regjistrohu <span class="ar">→</span></a>
+        </div>
       </article>
       <article class="card rv">
-        <div class="top"><span class="idx">03</span><span class="tag">Fëmijë 7–14</span></div>
-        <div><div class="big">2K</div><div class="nm">Shotat</div></div>
-        <p>E shkurtër, e sigurt dhe plot energji. Fëmijët vrapojnë në qytetin e tyre dhe e kalojnë vijën e finishit me krenari.</p>
-        <dl><div><dt>Ora</dt><dd>10:00</dd></div><div><dt>Çmimi</dt><dd>Falas</dd></div></dl>
-        <a class="go" href="#regjistrohu">Regjistro fëmijën <span class="ar">→</span></a>
+        <figure class="thumb ph">
+          <span class="badge">Fëmijë 7–14</span>
+          <img loading="lazy" decoding="async" alt="2K Shotat"
+               src="https://images.pexels.com/photos/35135977/pexels-photo-35135977.jpeg?auto=compress&cs=tinysrgb&w=1200">
+        </figure>
+        <div class="body">
+          <div class="top"><span class="idx">03</span><span class="tag">Fëmijë 7–14</span></div>
+          <div><div class="big">2K</div><div class="nm">Shotat</div></div>
+          <p>E shkurtër, e sigurt dhe plot energji. Fëmijët vrapojnë në qytetin e tyre dhe e kalojnë vijën e finishit me krenari.</p>
+          <dl><div><dt>Ora</dt><dd>10:00</dd></div><div><dt>Çmimi</dt><dd>Falas</dd></div></dl>
+          <a class="go" href="#regjistrohu">Regjistro fëmijën <span class="ar">→</span></a>
+        </div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ===================== QUOTE BAND ===================== -->
+<section class="qband">
+  <div class="bg ph">
+    <img loading="lazy" alt=""
+         src="https://images.pexels.com/photos/29840329/pexels-photo-29840329.jpeg?auto=compress&cs=tinysrgb&w=1920">
+  </div>
+  <div class="in">
+    <h2>Nuk ka rëndësi sa shpejt.<br><span>Ka rëndësi që je aty.</span></h2>
+    <p>Nga fëmijët në 2K deri te garuesit në 10K, e njëjta vijë nisjeje dhe i njëjti qytet.</p>
   </div>
 </section>
 
 <!-- ===================== ITINERARI ===================== -->
 <section id="itinerari" class="course">
   <div class="wrap">
-    <div class="head on-dark rv">
-      <div class="top"><span class="lbl on-dark"><span class="n">02</span>Itinerari</span><span class="rule"></span></div>
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">02</span>Itinerari</span><span class="rule"></span></div>
       <h2 class="h-lg">Qyteti është pista.</h2>
       <p>Nisja dhe finishi te Sheshi Adem Jashari. Itineraret kalojnë përgjatë Ibrit dhe qendrës së qytetit.</p>
     </div>
 
     <div class="course-grid">
       <div class="rv">
-        <div class="tabs" id="tabs">
-          <button class="tab on" data-r="10">10K Liqeni</button>
-          <button class="tab" data-r="5">5K Lumi</button>
-          <button class="tab" data-r="2">2K Shotat</button>
+        <div class="tabs" id="tabs" role="tablist">
+          <button class="tab on" data-r="10" role="tab" aria-selected="true">10K Liqeni</button>
+          <button class="tab" data-r="5" role="tab" aria-selected="false">5K Lumi</button>
+          <button class="tab" data-r="2" role="tab" aria-selected="false">2K Shotat</button>
         </div>
 
         <dl class="course-facts">
-          <div><dt>Distanca</dt><dd id="f-dist">10 km</dd></div>
-          <div><dt>Nisja</dt><dd id="f-time">11:00</dd></div>
-          <div><dt>Denivelacioni</dt><dd id="f-elev">~20 m</dd></div>
-          <div><dt>Çmimi</dt><dd id="f-price">20 €</dd></div>
+          <div><dt>Distanca</dt><dd id="f-dist">&mdash;</dd></div>
+          <div><dt>Nisja</dt><dd id="f-time">&mdash;</dd></div>
+          <div><dt>Denivelacioni</dt><dd id="f-elev">&mdash;</dd></div>
+          <div><dt>Çmimi</dt><dd id="f-price">&mdash;</dd></div>
         </dl>
 
         <div class="elev">
-          <p class="lbl on-dark" style="margin-bottom:.7rem">Profili i lartësisë</p>
+          <p class="lbl" style="margin-bottom:.7rem">Profili i lartësisë</p>
           <svg viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true">
             <path class="elev-fill" d="M0 52 L60 48 L130 54 L200 44 L270 50 L340 42 L410 49 L480 45 L540 51 L600 47 L600 70 L0 70Z"/>
             <path class="elev-line" d="M0 52 L60 48 L130 54 L200 44 L270 50 L340 42 L410 49 L480 45 L540 51 L600 47"/>
@@ -204,13 +243,13 @@
         </div>
 
         <div class="pace">
-          <p class="lbl on-dark" style="margin-bottom:1rem">Sa shpejt do ta mbarosh?</p>
+          <p class="lbl" style="margin-bottom:1rem">Sa shpejt do ta mbarosh?</p>
           <div class="row">
             <output id="p-time">55:00</output>
             <output id="p-pace" style="font-size:1rem;font-weight:700;color:var(--green)">5:30 <small>min/km</small></output>
           </div>
           <input type="range" id="p-range" min="240" max="480" step="5" value="330" aria-label="Ritmi për kilometër">
-          <div class="row" style="margin:.7rem 0 0"><span class="lbl on-dark">4:00 min/km</span><span class="lbl on-dark">8:00 min/km</span></div>
+          <div class="row" style="margin:.7rem 0 0"><span class="lbl">4:00 min/km</span><span class="lbl">8:00 min/km</span></div>
         </div>
       </div>
 
@@ -218,7 +257,7 @@
         <div class="panel">
           <div class="panel-top">
             <div class="who">
-              <span class="chip" id="m-chip">10K Liqeni</span>
+              <span class="chip" id="m-chip">&mdash;</span>
               <span class="where">Mitrovicë · Kosovë</span>
             </div>
             <a class="btn xs ghost-d" href="#">Shkarko GPX</a>
@@ -238,6 +277,76 @@
   </div>
 </section>
 
+<!-- ===================== GALERIA ===================== -->
+<section id="galeria" class="gallery">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="top"><span class="lbl"><span class="n">03</span>Galeria</span><span class="rule"></span></div>
+      <h2 class="h-lg">Kështu duket dita e garës.</h2>
+      <p>Momente nga vija e nisjes deri te finishi. Kliko për ta hapur foton.</p>
+    </div>
+
+    <div class="gal" id="gal">
+      <figure class="ph" tabindex="0" role="button" aria-label="Nisja e garës"
+        data-full="https://images.pexels.com/photos/29840322/pexels-photo-29840322.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Nisja e garës">
+        <img loading="lazy" decoding="async" alt="Nisja e garës"
+             src="https://images.pexels.com/photos/29840322/pexels-photo-29840322.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Nisja e garës</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Grupi kryesor"
+        data-full="https://images.pexels.com/photos/29840333/pexels-photo-29840333.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Grupi kryesor">
+        <img loading="lazy" decoding="async" alt="Grupi kryesor"
+             src="https://images.pexels.com/photos/29840333/pexels-photo-29840333.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Grupi kryesor</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Ritmi i garës"
+        data-full="https://images.pexels.com/photos/29840335/pexels-photo-29840335.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Ritmi i garës">
+        <img loading="lazy" decoding="async" alt="Ritmi i garës"
+             src="https://images.pexels.com/photos/29840335/pexels-photo-29840335.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Ritmi i garës</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Fëmijët në 2K"
+        data-full="https://images.pexels.com/photos/12772956/pexels-photo-12772956.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Fëmijët në 2K">
+        <img loading="lazy" decoding="async" alt="Fëmijët në 2K"
+             src="https://images.pexels.com/photos/12772956/pexels-photo-12772956.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Fëmijët në 2K</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Rrugët e mbyllura"
+        data-full="https://images.pexels.com/photos/29840341/pexels-photo-29840341.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Rrugët e mbyllura">
+        <img loading="lazy" decoding="async" alt="Rrugët e mbyllura"
+             src="https://images.pexels.com/photos/29840341/pexels-photo-29840341.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Rrugët e mbyllura</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Kilometri i fundit"
+        data-full="https://images.pexels.com/photos/29840343/pexels-photo-29840343.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Kilometri i fundit">
+        <img loading="lazy" decoding="async" alt="Kilometri i fundit"
+             src="https://images.pexels.com/photos/29840343/pexels-photo-29840343.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Kilometri i fundit</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Vija e finishit"
+        data-full="https://images.pexels.com/photos/29840344/pexels-photo-29840344.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Vija e finishit">
+        <img loading="lazy" decoding="async" alt="Vija e finishit"
+             src="https://images.pexels.com/photos/29840344/pexels-photo-29840344.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Vija e finishit</figcaption>
+      </figure>
+      <figure class="ph" tabindex="0" role="button" aria-label="Medalja e përfundimit"
+        data-full="https://images.pexels.com/photos/17982963/pexels-photo-17982963.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        data-cap="Medalja e përfundimit">
+        <img loading="lazy" decoding="async" alt="Medalja e përfundimit"
+             src="https://images.pexels.com/photos/17982963/pexels-photo-17982963.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <figcaption class="cap">Medalja e përfundimit</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== STRIP ===================== -->
 <div class="strip" aria-hidden="true">
   <div class="tr">
@@ -250,7 +359,7 @@
 <section id="rreth">
   <div class="wrap">
     <div class="head rv">
-      <div class="top"><span class="lbl"><span class="n">03</span>Rreth MitroRun</span><span class="rule"></span></div>
+      <div class="top"><span class="lbl"><span class="n">04</span>Rreth MitroRun</span><span class="rule"></span></div>
     </div>
     <div class="about">
       <p class="lede rv">Në qendër është vrapimi. Por MitroRun është një fundjavë që e nxjerr qytetin në lëvizje.</p>
@@ -269,42 +378,36 @@
 </section>
 
 <!-- ===================== MITROVICA ===================== -->
-<section id="mitrovica">
+<section id="mitrovica" class="disc">
   <div class="wrap">
     <div class="head rv">
-      <div class="top"><span class="lbl"><span class="n">04</span>Zbulo Mitrovicën</span><span class="rule"></span></div>
+      <div class="top"><span class="lbl"><span class="n">05</span>Zbulo Mitrovicën</span><span class="rule"></span></div>
     </div>
     <div class="disc-grid">
       <div class="rv">
         <h2 class="h-lg">Shihe fytyrën e re.<br>Rilidhu me të kaluarën.</h2>
-        <p class="mut" style="margin-top:1.6rem">Qyteti po ndryshon. Hapësira të reja, energjia e të rinjve, arti, muzika dhe bizneset lokale po krijojnë një fytyrë të re të Mitrovicës. Në të njëjtën kohë, historia dhe trashëgimia e saj mbeten pjesë e identitetit të qytetit.</p>
-        <p class="mut">Eja për garën dhe qëndro më gjatë. Ec nëpër qytet, zbulo kulturën lokale, tako njerëzit dhe shijo ushqimin.</p>
+        <div class="mut" style="margin-top:1.6rem">
+          <p>Qyteti po ndryshon. Hapësira të reja, energjia e të rinjve, arti, muzika dhe bizneset lokale po krijojnë një fytyrë të re të Mitrovicës. Në të njëjtën kohë, historia dhe trashëgimia e saj mbeten pjesë e identitetit të qytetit.</p>
+          <p>Eja për garën dhe qëndro më gjatë. Ec nëpër qytet, zbulo kulturën lokale, tako njerëzit dhe shijo ushqimin.</p>
+        </div>
         <p style="margin-top:2rem"><a class="btn ghost" href="#">Planifiko vizitën</a></p>
       </div>
-      <div class="plates">
-        <figure class="plate">
-          <svg viewBox="0 0 400 130" aria-hidden="true">
-            <path class="pl-l" d="M20 106h360M56 106V72M116 106V64M200 106V54M284 106V64M344 106V72"/>
-            <path class="pl-a" d="M20 74C70 40 140 24 200 24s130 16 180 50"/>
-            <path class="pl-l" d="M20 118c22-8 44-8 66 0s44 8 66 0 44-8 66 0 44 8 66 0 44-8 66 0" opacity=".35"/>
-          </svg>
-          <b>Ura mbi Ibër</b><span>Pika ku qyteti takohet me vetveten.</span>
+
+      <div class="plates rv">
+        <figure class="plate ph">
+          <img loading="lazy" decoding="async" alt="Ura mbi Ibër"
+               src="https://images.pexels.com/photos/17861495/pexels-photo-17861495.jpeg?auto=compress&cs=tinysrgb&w=1400">
+          <figcaption class="cap"><b>Ura mbi Ibër</b><span>Pika ku qyteti takohet me vetveten.</span></figcaption>
         </figure>
-        <figure class="plate">
-          <svg viewBox="0 0 200 150" aria-hidden="true">
-            <path class="pl-l" d="M40 132h120M70 132V56h60v76M70 92h60"/>
-            <path class="pl-a" d="M100 56V26M78 40l44-14M122 40L78 26"/>
-            <circle class="pl-l" cx="100" cy="20" r="9"/>
-          </svg>
-          <b>Trepça</b><span>Trashëgimia që e ndërtoi qytetin.</span>
+        <figure class="plate ph">
+          <img loading="lazy" decoding="async" alt="Trepça"
+               src="https://images.pexels.com/photos/723905/pexels-photo-723905.jpeg?auto=compress&cs=tinysrgb&w=1000">
+          <figcaption class="cap"><b>Trepça</b><span>Trashëgimia që e ndërtoi qytetin.</span></figcaption>
         </figure>
-        <figure class="plate">
-          <svg viewBox="0 0 200 150" aria-hidden="true">
-            <path class="pl-l" d="M16 122h168"/>
-            <path class="pl-a" d="M16 122l44-56 30 34 26-44 34 42 34-24"/>
-            <circle class="pl-l" cx="150" cy="42" r="12"/>
-          </svg>
-          <b>Bjeshkët e Bajgorës</b><span>Njëzet minuta nga vija e finishit.</span>
+        <figure class="plate ph">
+          <img loading="lazy" decoding="async" alt="Bjeshkët e Bajgorës"
+               src="https://images.pexels.com/photos/5828197/pexels-photo-5828197.jpeg?auto=compress&cs=tinysrgb&w=1000">
+          <figcaption class="cap"><b>Bjeshkët e Bajgorës</b><span>Njëzet minuta nga vija e finishit.</span></figcaption>
         </figure>
       </div>
     </div>
@@ -315,11 +418,15 @@
 <section id="programi" class="races">
   <div class="wrap">
     <div class="head rv">
-      <div class="top"><span class="lbl"><span class="n">05</span>Pakoja &amp; Programi</span><span class="rule"></span></div>
+      <div class="top"><span class="lbl"><span class="n">06</span>Pakoja &amp; Programi</span><span class="rule"></span></div>
       <p>Përmbajtja përfundimtare e pakos konfirmohet para hapjes së regjistrimit.</p>
     </div>
     <div class="two">
       <div class="rv">
+        <figure class="packshot ph">
+          <img loading="lazy" decoding="async" alt="Pakoja e vrapuesit"
+               src="https://images.pexels.com/photos/17982968/pexels-photo-17982968.jpeg?auto=compress&cs=tinysrgb&w=1200">
+        </figure>
         <h3 class="h-md" style="margin-bottom:1.4rem">Pakoja e vrapuesit</h3>
         <ul class="list">
           <li>Numri zyrtar i garuesit</li>
@@ -331,6 +438,10 @@
         </ul>
       </div>
       <div class="rv">
+        <figure class="packshot ph">
+          <img loading="lazy" decoding="async" alt="Programi"
+               src="https://images.pexels.com/photos/2342409/pexels-photo-2342409.jpeg?auto=compress&cs=tinysrgb&w=1200">
+        </figure>
         <h3 class="h-md" style="margin-bottom:1.4rem">Programi</h3>
         <ol class="plist">
           <li><div><b>Rock Live</b><span>Së paku dy performanca live nga grupe rock</span></div></li>
@@ -348,7 +459,7 @@
 <section id="organizatoret">
   <div class="wrap">
     <div class="head rv">
-      <div class="top"><span class="lbl"><span class="n">06</span>Organizatorët</span><span class="rule"></span></div>
+      <div class="top"><span class="lbl"><span class="n">07</span>Organizatorët</span><span class="rule"></span></div>
     </div>
     <div class="orgs">
       <div class="org rv"><b>7ARTE</b><p>Sjell përvojën në kulturë, aktivizim qytetar dhe organizim të ngjarjeve në Mitrovicë.</p></div>
@@ -367,7 +478,7 @@
 <section id="faq" class="races">
   <div class="wrap">
     <div class="head rv">
-      <div class="top"><span class="lbl"><span class="n">07</span>Pyetje të shpeshta</span><span class="rule"></span></div>
+      <div class="top"><span class="lbl"><span class="n">08</span>Pyetje të shpeshta</span><span class="rule"></span></div>
     </div>
     <div class="faq rv">
       <details open><summary>Si regjistrohem? <span class="pm"></span></summary><div class="ans">Regjistrimi bëhet plotësisht online. Zgjidh distancën, plotëso të dhënat dhe përfundo pagesën për ta siguruar vendin tënd. Konfirmimin e pranon me email.</div></details>
@@ -381,14 +492,12 @@
 
 <!-- ===================== CTA ===================== -->
 <section id="regjistrohu" class="cta">
-  <div class="cta-map" aria-hidden="true">
-    <svg viewBox="0 0 600 300" fill="none">
-      <path d="M40 240C120 200 160 120 260 110S420 170 500 120 560 60 580 50" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 16"/>
-      <circle cx="40" cy="240" r="10" fill="#fff"/><circle cx="580" cy="50" r="10" fill="#fff"/>
-    </svg>
+  <div class="bg">
+    <img loading="lazy" alt=""
+         src="https://images.pexels.com/photos/35273264/pexels-photo-35273264.jpeg?auto=compress&cs=tinysrgb&w=1920">
   </div>
   <div class="wrap">
-    <p class="lbl" style="color:rgba(255,255,255,.82);margin-bottom:1.2rem">Vendet janë të kufizuara</p>
+    <p class="lbl" style="color:rgba(255,255,255,.85);margin-bottom:1.2rem">Vendet janë të kufizuara</p>
     <h2 class="h-xl">Vrapo në zemër<br>të Mitrovicës</h2>
     <p>Zgjidh distancën, plotëso të dhënat dhe përfundo pagesën. Fillo përgatitjet sot.</p>
     <a class="btn" href="#">Regjistrohu tani <span class="ar">→</span></a>
@@ -403,11 +512,26 @@
       <p class="mut" style="margin-top:.8rem">Merr njoftimet për regjistrimin, itineraret, programin dhe përgatitjet për garë.</p>
     </div>
     <div class="rv">
-      <div class="field">
-        <input type="email" placeholder="Adresa e emailit" aria-label="Adresa e emailit">
-        <button class="btn sm" type="button">Abonohu</button>
-      </div>
-      <p class="lbl" style="margin-top:.9rem;letter-spacing:.1em">Pa spam. Vetëm njoftimet e garës.</p>
+      <form class="mr-news" id="mr-news" novalidate>
+        <div class="field">
+          <label class="screen-reader-text" for="mr-email">Adresa e emailit</label>
+          <input type="email" id="mr-email" name="email" placeholder="Adresa e emailit" autocomplete="email" required>
+          <button class="btn sm" type="submit">Abonohu</button>
+        </div>
+
+        <div aria-hidden="true" style="position:absolute;left:-9999px">
+          <label for="mr-website">Lëre bosh</label>
+          <input type="text" id="mr-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <label class="mr-consent-check">
+          <input type="checkbox" name="consent" required>
+          <span>Pajtohem që të dhënat e mia të përdoren për njoftimet e garës. Shih <a href="#">politikën e privatësisë</a>.</span>
+        </label>
+
+        <p class="mr-news-msg" role="status" aria-live="polite"></p>
+        <p class="lbl" style="margin-top:.9rem;letter-spacing:.1em">Pa spam. Vetëm njoftimet e garës.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -437,7 +561,68 @@
   <a class="btn sm" href="#regjistrohu">Regjistrohu</a>
 </div>
 
+<div id="lb" role="dialog" aria-modal="true" aria-label="Galeria">
+  <button class="x" aria-label="Mbyll">&#10005;</button>
+  <button class="pv" aria-label="Mëparshme">&lsaquo;</button>
+  <img alt="">
+  <button class="nx" aria-label="Tjetra">&rsaquo;</button>
+  <p class="cap"></p>
+</div>
+
+<!--
+  Runtime configuration. In WordPress this same object is printed by the theme
+  from the MitroRun Core settings (wp_localize_script). Here it is inline so the
+  mockup and the theme can share one identical assets/js/main.js.
+
+  Routes are indicative sketches plotted by hand from the square. In WordPress
+  they come from the GPX uploaded to each race.
+-->
+<script>
+window.MitroRun = {
+  raceDate: '2026-10-04T11:00:00+02:00',
+  start: [42.8901, 20.8672],
+  i18n: { startFinish:'Start / Finish', km:'km', minKm:'min/km' },
+  routes: {
+    '10': { label:'10K Liqeni', dist:'10 km', time:'11:00', elev:'~20 m', price:'20 €', km:10, pts:[
+      [42.8901,20.8672],[42.8913,20.8662],[42.8927,20.8652],[42.8942,20.8648],[42.8958,20.8656],
+      [42.8972,20.8676],[42.8981,20.8704],[42.8983,20.8736],[42.8974,20.8768],[42.8957,20.8792],
+      [42.8934,20.8806],[42.8908,20.8812],[42.8882,20.8806],[42.8857,20.8792],[42.8835,20.8770],
+      [42.8818,20.8742],[42.8808,20.8708],[42.8806,20.8672],[42.8814,20.8636],[42.8832,20.8606],
+      [42.8856,20.8586],[42.8878,20.8584],[42.8894,20.8602],[42.8901,20.8632],[42.8902,20.8656],
+      [42.8901,20.8672]] },
+    '5': { label:'5K Lumi', dist:'5 km', time:'11:30', elev:'~12 m', price:'15 €', km:5, pts:[
+      [42.8901,20.8672],[42.8911,20.8664],[42.8922,20.8658],[42.8934,20.8664],[42.8942,20.8682],
+      [42.8944,20.8704],[42.8936,20.8724],[42.8921,20.8736],[42.8903,20.8740],[42.8885,20.8734],
+      [42.8871,20.8720],[42.8864,20.8700],[42.8866,20.8678],[42.8875,20.8660],[42.8888,20.8656],
+      [42.8897,20.8664],[42.8901,20.8672]] },
+    '2': { label:'2K Shotat', dist:'2 km', time:'10:00', elev:'~6 m', price:'Falas', km:2, pts:[
+      [42.8901,20.8672],[42.8908,20.8666],[42.8915,20.8662],[42.8921,20.8668],[42.8922,20.8680],
+      [42.8916,20.8690],[42.8906,20.8694],[42.8896,20.8690],[42.8892,20.8680],[42.8895,20.8672],
+      [42.8901,20.8672]] }
+  }
+};
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="assets/js/main.js" defer></script>
+
+<!--
+  Mockup only. There is no REST endpoint here, so main.js leaves the newsletter
+  form alone. This keeps the submit button from navigating and shows the state
+  the WordPress build returns on success. Delete when porting anywhere real.
+-->
+<script>
+document.getElementById('mr-news').addEventListener('submit', function(e){
+  e.preventDefault();
+  var msg = this.querySelector('.mr-news-msg');
+  var email = this.querySelector('input[name=email]').value.trim();
+  var consent = this.querySelector('input[name=consent]').checked;
+  if (!email || email.indexOf('@') < 1) { msg.className='mr-news-msg err'; msg.textContent='Adresa e emailit nuk është e vlefshme.'; return; }
+  if (!consent) { msg.className='mr-news-msg err'; msg.textContent='Ju lutemi pranoni kushtet.'; return; }
+  msg.className='mr-news-msg ok';
+  msg.textContent='Faleminderit. (Demonstrim, adresa nuk ruhet në këtë mockup.)';
+  this.reset();
+});
+</script>
 </body>
 </html>
