@@ -318,7 +318,9 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
 .course-grid{display:grid;gap:2.2rem}
 /* Map switched off: one column, held to a comfortable measure so the facts and
    pace tool do not stretch the full width of the page. */
-.course-grid.no-map{max-width:760px}
+/* With the map hidden the itinerary uses the full measure: the facts sit four
+   across, the elevation profile and the pace tool run the full width. */
+.course-grid.no-map{max-width:none}
 .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
 .tab{padding:.6rem 1.1rem;border-radius:100px;border:1px solid var(--line);
   font-size:.8rem;font-weight:700;transition:background .35s var(--e),color .35s,border-color .35s}
@@ -484,8 +486,11 @@ footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--p
   .news{grid-template-columns:1fr 1fr;gap:3.5rem}
   .fgrid{grid-template-columns:repeat(2,1fr)}
   .course-facts{grid-template-columns:repeat(4,1fr)}
+  /* One row of four, so every cell but the first takes a divider. Both
+     selectors score the same, and the later one wins; `div + div` would lose
+     to the :nth-child reset above it and leave a single stray rule. */
   .course-facts div:nth-child(even){border-left:0;padding-left:0}
-  .course-facts div + div{border-left:1px solid var(--line);padding-left:1.1rem}
+  .course-facts div:not(:first-child){border-left:1px solid var(--line);padding-left:1.1rem}
 }
 @media (min-width:960px){
   nav.main{display:flex}
