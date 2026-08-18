@@ -458,7 +458,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .field:focus-within{border-color:var(--green)}
 .field input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:.95rem;padding:.6rem 0}
 .field input::placeholder{color:#A9AFAA}
-footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--pad) 6rem}
+/* The deep bottom padding exists only to clear the fixed CTA bar, which is
+   shown below 960px. Above that the bar is hidden, so the same padding was
+   leaving a tall band of empty black under the footer. */
+footer{background:var(--black);color:#fff;
+  padding:clamp(3.5rem,6vw,5rem) var(--pad) calc(4.5rem + env(safe-area-inset-bottom))}
 .fgrid{display:grid;gap:2.4rem}
 .fgrid h4{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-dk);margin-bottom:1rem}
 .fgrid ul{list-style:none;display:grid;gap:.55rem;font-size:.94rem}
@@ -496,6 +500,7 @@ footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--p
   nav.main{display:flex}
   .burger{display:none}
   #stick{display:none}
+  footer{padding-bottom:clamp(3.5rem,6vw,5rem)}
   .about{grid-template-columns:1.05fr 1fr}
   .two{grid-template-columns:1fr 1fr}
   .disc-grid{grid-template-columns:1fr 1.02fr}
