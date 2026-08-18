@@ -71,7 +71,6 @@
     <a href="#rreth">Rreth</a><a href="#faq">FAQ</a>
   </nav>
   <div class="hd-right">
-    <div class="lang"><b>SQ</b><span>EN</span><span>SR</span></div>
     <a class="btn sm" href="#regjistrohu">Regjistrohu</a>
     <button class="burger" id="bg" aria-label="Menyja" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
   </div>
@@ -579,6 +578,9 @@
 -->
 <script>
 window.MitroRun = {
+  // Course map is off until the route is approved by the municipality.
+  // In WordPress this is MitroRun > Settings > Map. Flip to true to preview it.
+  showMap: false,
   raceDate: '2026-10-04T11:00:00+02:00',
   start: [42.8901, 20.8672],
   i18n: { startFinish:'Start / Finish', km:'km', minKm:'min/km' },

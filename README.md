@@ -24,7 +24,9 @@ copy it across. The only difference is that the theme reads its data from
 WordPress, while here the same `window.MitroRun` object is written by hand at
 the bottom of `index.html`.
 
-Content is Albanian only. English and Serbian are planned but not built.
+Content is Albanian. The WordPress admin interface is English. The SQ / EN / SR
+switcher has been removed for now; the theme stays translation-ready, so it can
+come back with Polylang or WPML.
 
 ## Stack
 
@@ -84,18 +86,30 @@ Three places must stay in sync:
 2. The three race cards (`section#garat`)
 3. The `routes` object in the `window.MitroRun` block at the bottom of `index.html`
 
-In WordPress all three come from one place, MitroRun → Garat.
+In WordPress all three come from one place, MitroRun → Races.
 
 ### Countdown and configuration
 Everything the JavaScript needs sits in one block at the bottom of `index.html`:
 
 ```js
 window.MitroRun = {
+  showMap: false,
   raceDate: '2026-10-04T11:00:00+02:00',
   start: [42.8901, 20.8672],
   routes: { ... }
 };
 ```
+
+### The course map
+`showMap` is **off**, matching the shipped default, because the route is not yet
+approved by the municipality. The rest of the itinerary section — tabs, facts,
+elevation profile and pace calculator — works exactly as before; only the map
+panel is gone and the column collapses to a single measure.
+
+Flip it to `true` to preview the map. In WordPress the same switch is
+**MitroRun → Settings → Map**, and while it is off Leaflet is never requested at
+all. The mockup still loads Leaflet either way, so the flag can be flipped
+without editing the markup.
 
 ### Course routes
 Routes are **indicative sketches**, not surveyed. They are plotted by hand from the
@@ -141,6 +155,7 @@ All tokens are at the top of `assets/css/style.css`:
 
 ## Before launch
 
+- [ ] Turn the course map back on once the route is approved
 - [ ] Confirm the 5K start time. It is set to 11:30 here and in the WordPress seed
       data, not 11:00 as in the original brief, because two waves cannot leave one
       start line at the same minute

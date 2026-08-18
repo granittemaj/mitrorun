@@ -70,6 +70,10 @@
   --muted:#6E756F;--muted-dk:rgba(255,255,255,.58);
   --f:'Archivo',-apple-system,Helvetica,sans-serif;
   --pad:clamp(1.25rem,5vw,5.5rem);--max:1440px;
+  /* Full-bleed bars (header, sticky bar) have no inner .wrap, so past
+     --max + 2*--pad they would sit closer to the edge than the page content.
+     This keeps their contents on the same line as everything else. */
+  --gutter:max(var(--pad),calc((100% - var(--max)) / 2));
   --e:cubic-bezier(.19,1,.22,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -82,6 +86,21 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:var(--green);color:#fff}
 .wrap{max-width:var(--max);margin-inline:auto}
+
+/* Visually hidden, still read aloud. Also defined in the theme's style.css as a
+   WordPress core class; it lives here too so the static mockup, which loads only
+   this file, hides the same labels. */
+.screen-reader-text{
+  border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;
+  overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important;
+}
+
+/* Grid and flex children default to min-width:auto, so a control that will not
+   shrink (the newsletter input plus its button) can force its column wider than
+   the container. That blew the document out to 372px at a 320px viewport, which
+   in turn pushed the fixed header's burger off screen. Opt the layout grids out. */
+.bar .wrap>*,.cards>*,.card dl>*,.course-grid>*,.course-facts>*,.about>*,.stats>*,
+.disc-grid>*,.plates>*,.two>*,.plist li>*,.orgs>*,.partners>*,.news>*,.fgrid>*{min-width:0}
 section{padding:clamp(4.5rem,9vw,9rem) var(--pad)}
 h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:.95}
 .h-xl{font-size:clamp(2.6rem,7.4vw,6rem)}
@@ -117,7 +136,7 @@ h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:.95}
 
 /* ---------- HEADER ---------- */
 header{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;
-  justify-content:space-between;gap:1rem;padding:1rem var(--pad);color:#fff;
+  justify-content:space-between;gap:1rem;padding:1rem var(--gutter);color:#fff;
   transition:background .45s var(--e),color .45s var(--e),box-shadow .45s}
 header.stuck{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);color:var(--black);box-shadow:0 1px 0 var(--line)}
 .logo{display:inline-flex;align-items:center;gap:.55rem;font-weight:900;letter-spacing:-.045em;font-size:1.12rem}
@@ -128,8 +147,6 @@ nav.main a:hover,nav.main a.act{opacity:1}
 nav.main a::after{content:'';position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:var(--green);transition:width .35s var(--e)}
 nav.main a:hover::after,nav.main a.act::after{width:100%}
 .hd-right{display:flex;align-items:center;gap:.7rem}
-.lang{display:none;gap:.45rem;font-size:.72rem;font-weight:600;letter-spacing:.08em;opacity:.7}
-.lang b{color:var(--green)}
 .burger{display:flex;flex-direction:column;gap:5px;padding:.55rem;margin-right:-.55rem}
 .burger i{width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .4s var(--e),opacity .25s}
 .burger.on i:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -223,7 +240,10 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
   font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .card .body{position:relative;z-index:1;padding:clamp(1.3rem,2.6vw,1.9rem);
   display:flex;flex-direction:column;gap:1rem;flex:1}
-.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.card .top{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  /* Reserve two lines so a tag that wraps in one card does not push its big
+     number below the others in the row. */
+  min-height:2.2rem}
 .card .idx{font-size:.7rem;font-weight:700;letter-spacing:.16em;color:var(--green)}
 .card .tag{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .5s}
 .card:hover .tag{color:rgba(255,255,255,.6)}
@@ -235,13 +255,16 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
 .card p{color:var(--muted);font-size:.92rem;transition:color .5s}
 .card:hover p{color:rgba(255,255,255,.66)}
 .card dl{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;padding-top:1rem;
-  border-top:1px solid var(--line);transition:border-color .5s}
+  border-top:1px solid var(--line);transition:border-color .5s;
+  /* Takes the slack, so the facts row and the CTA below it sit on the same line
+     in every card no matter how long the description runs. */
+  margin-top:auto}
 .card:hover dl{border-color:rgba(255,255,255,.18)}
 .card dt{font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
   color:var(--muted);margin-bottom:.25rem;transition:color .5s}
 .card:hover dt{color:rgba(255,255,255,.5)}
 .card dd{font-size:1rem;font-weight:700}
-.card .go{margin-top:auto;display:inline-flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:700;color:var(--green)}
+.card .go{display:inline-flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:700;color:var(--green)}
 .card .go .ar{transition:transform .35s var(--e)}
 .card:hover .go .ar{transform:translateX(5px)}
 
@@ -293,6 +316,9 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
 /* ---------- COURSE ---------- */
 .course{background:var(--white)}
 .course-grid{display:grid;gap:2.2rem}
+/* Map switched off: one column, held to a comfortable measure so the facts and
+   pace tool do not stretch the full width of the page. */
+.course-grid.no-map{max-width:760px}
 .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
 .tab{padding:.6rem 1.1rem;border-radius:100px;border:1px solid var(--line);
   font-size:.8rem;font-weight:700;transition:background .35s var(--e),color .35s,border-color .35s}
@@ -439,7 +465,7 @@ footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--p
 .fbot{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line-dk);display:flex;
   flex-wrap:wrap;gap:.6rem 1.6rem;font-size:.74rem;color:var(--muted-dk)}
 #stick{position:fixed;left:0;right:0;bottom:0;z-index:880;display:flex;align-items:center;
-  justify-content:space-between;gap:1rem;padding:.7rem var(--pad) calc(.7rem + env(safe-area-inset-bottom));
+  justify-content:space-between;gap:1rem;padding:.7rem var(--gutter) calc(.7rem + env(safe-area-inset-bottom));
   background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-top:1px solid var(--line);
   transform:translateY(130%);transition:transform .5s var(--e)}
 #stick.show{transform:none}
@@ -463,7 +489,6 @@ footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--p
 }
 @media (min-width:960px){
   nav.main{display:flex}
-  .lang{display:flex}
   .burger{display:none}
   #stick{display:none}
   .about{grid-template-columns:1.05fr 1fr}
@@ -474,6 +499,7 @@ footer{background:var(--black);color:#fff;padding:clamp(3.5rem,6vw,5rem) var(--p
   .gal{columns:3;column-gap:1rem}
   .fgrid{grid-template-columns:1.5fr 1fr 1fr 1fr}
   .course-grid{grid-template-columns:.92fr 1.08fr;gap:3.2rem;align-items:start}
+  .course-grid.no-map{grid-template-columns:1fr}
   .panel{position:sticky;top:6rem}
   .panel-map{aspect-ratio:3/4}
 }
