@@ -213,9 +213,9 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
 /* ---------- FACT BAR ---------- */
 .bar{background:var(--green);color:#fff;padding:0 var(--pad);position:relative;z-index:5}
 .bar .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
-.bar div{padding:1.4rem 0;border-top:1px solid rgba(255,255,255,.22)}
+.bar div{padding:1.4rem 1.2rem;text-align:center;border-top:1px solid rgba(255,255,255,.22)}
 .bar div:nth-child(-n+2){border-top:0}
-.bar div + div{padding-left:1.2rem;border-left:1px solid rgba(255,255,255,.22)}
+.bar div + div{border-left:1px solid rgba(255,255,255,.22)}
 .bar b{display:block;font-size:clamp(1.5rem,4vw,2.3rem);font-weight:900;letter-spacing:-.045em;line-height:1}
 .bar span{display:block;margin-top:.4rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
 
@@ -526,7 +526,7 @@ footer{background:var(--black);color:#fff;
   .two{grid-template-columns:1fr 1fr}
   .disc-grid{grid-template-columns:1fr 1.02fr}
     .gal{columns:3;column-gap:1rem}
-  .fgrid{grid-template-columns:1.25fr repeat(4,1fr);gap:2rem}
+  .fgrid{grid-template-columns:1.4fr repeat(3,1fr);gap:2.4rem}
   .course-grid{grid-template-columns:.92fr 1.08fr;gap:3.2rem;align-items:start}
   .panel{position:sticky;top:6rem}
   .panel-map{aspect-ratio:3/4}
