@@ -102,9 +102,12 @@ window.MitroRun = {
 
 ### The course map
 `showMap` is **off**, matching the shipped default, because the route is not yet
-approved by the municipality. The rest of the itinerary section — tabs, facts,
-elevation profile and pace calculator — works exactly as before; only the map
-panel is gone and the column collapses to a single measure.
+approved by the municipality. The panel still renders, carrying a **Coming soon**
+notice, so the section keeps its two-column shape. Tabs, facts and the pace
+calculator work either way.
+
+The elevation profile has been removed. It drew one fixed path for all three
+distances, so it presented invented data as a measurement.
 
 Flip it to `true` to preview the map. In WordPress the same switch is
 **MitroRun → Settings → Map**, and while it is off Leaflet is never requested at
@@ -155,12 +158,12 @@ All tokens are at the top of `assets/css/style.css`:
 
 ## Before launch
 
-- [ ] Turn the course map back on once the route is approved
+- [ ] Turn the course map back on once the route is approved. Until then the
+      panel shows a Coming soon notice in its place
 - [ ] Confirm the 5K start time. It is set to 11:30 here and in the WordPress seed
       data, not 11:00 as in the original brief, because two waves cannot leave one
       start line at the same minute
 - [ ] Replace indicative routes with the official GPX
-- [ ] Connect the registration buttons to RAVE (hosted redirect or embedded widget, to be confirmed)
 - [ ] Add real partner logos, currently numbered placeholders
 - [ ] Replace all Pexels photography with real Mitrovica images, with written model
       releases — this is a legal requirement, not a preference, and it applies

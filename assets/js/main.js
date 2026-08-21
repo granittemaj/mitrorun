@@ -206,15 +206,8 @@ function updatePace(){
 }
 if(hasPace){rg.addEventListener('input',updatePace);updatePace();}
 
-// The course map is opt-in, from MitroRun > Settings > Map. WordPress simply
-// does not print the panel when it is off, so this is a no-op there. The static
-// mockup keeps the markup and relies on this, so one flag drives both.
-if(CFG.showMap===false){
-  var mapCol=d.querySelector('.course-grid .panel');
-  if(mapCol){(mapCol.closest('.rv')||mapCol).remove()}
-}
-var courseGrid=d.querySelector('.course-grid');
-if(courseGrid && !courseGrid.querySelector('.panel')){courseGrid.classList.add('no-map')}
+// With the map off the panel is still rendered, carrying the coming soon notice,
+// so nothing is removed here. Only the Leaflet drawing below is conditional.
 
 // Route data drives the facts, the tabs and the pace tool whether or not a map
 // is on screen. Only the drawing below is conditional on Leaflet and the panel.
