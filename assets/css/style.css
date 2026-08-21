@@ -403,7 +403,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
 /* ---------- MITROVICA ---------- */
 .disc{background:var(--off)}
-.disc-grid{display:grid;gap:clamp(2rem,4vw,4rem);align-items:center}
+.disc-grid{display:grid;gap:clamp(2rem,4vw,4rem);align-items:start}
 .disc-grid p + p{margin-top:1rem}
 .plates{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
 .plate{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/5}
