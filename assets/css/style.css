@@ -440,11 +440,18 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
    many marks there are instead of stranding three in a six-up grid. */
 .partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1px;background:var(--line);
   border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:1.4rem}
-.partner img{max-width:72%;max-height:58%;width:auto;height:auto;object-fit:contain;
+/* No aspect-ratio here: it gave every tile a definite height, so a short logo
+   kept that height while the row grew to the tallest one, leaving the grid's
+   own background showing underneath. A min-height plus the default stretch
+   makes the tiles fill the row and match each other. */
+.partner{background:#fff;min-height:clamp(112px,10vw,164px);display:grid;place-items:center;
+  padding:clamp(1rem,2vw,1.6rem);font-size:.64rem;
+  font-weight:600;letter-spacing:.16em;color:#B4BAB5;transition:color .35s,background .35s}
+/* Capped in absolute units. A percentage resolved against the tile's own height
+   and left tall marks free to stretch the row. */
+.partner img{max-width:100%;max-height:clamp(44px,4.6vw,68px);width:auto;height:auto;object-fit:contain;
   filter:grayscale(1);opacity:.7;transition:filter .4s var(--e),opacity .4s var(--e)}
 .partner:hover img{filter:none;opacity:1}
-.partner{background:#fff;aspect-ratio:2.6/1;display:grid;place-items:center;font-size:.64rem;
-  font-weight:600;letter-spacing:.16em;color:#B4BAB5;transition:color .35s,background .35s}
 .partner:hover{background:var(--off);color:var(--green)}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;padding:1.35rem 0;display:flex;align-items:center;gap:1.2rem;
