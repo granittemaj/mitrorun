@@ -394,7 +394,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 /* ---------- ABOUT ---------- */
 .about{display:grid;gap:clamp(2rem,4vw,4rem)}
 .lede{font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:700;letter-spacing:-.035em;line-height:1.15}
-.about-body p + p{margin-top:1rem;color:var(--muted)}
+/* The colour belonged on every paragraph, not only the ones after the first:
+   p + p skips the opening one, so it stayed body-black while the rest went
+   grey, which read as two different typefaces. */
+.about-body p{color:var(--muted)}
+.about-body p + p{margin-top:1rem}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);margin-top:clamp(2.4rem,5vw,3.5rem)}
 .stats div{padding:1.4rem 0;border-bottom:1px solid var(--line)}
 .stats div:nth-child(even){border-left:1px solid var(--line);padding-left:1.2rem}
