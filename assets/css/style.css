@@ -141,6 +141,11 @@ header{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:
 header.stuck{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);color:var(--black);box-shadow:0 1px 0 var(--line)}
 .logo{display:inline-flex;align-items:center;gap:.55rem;font-weight:900;letter-spacing:-.045em;font-size:1.12rem}
 .logo .d{width:8px;height:8px;border-radius:50%;background:var(--green);flex:0 0 8px}
+/* An uploaded mark replaces the dot and wordmark, so cap it to the lockup's
+   height and let the width follow. Without this it prints at natural size and
+   pushes the nav off the header. */
+.logo .logo-mark{width:auto;height:clamp(26px,2.4vw,34px);max-width:190px;object-fit:contain}
+footer .logo .logo-mark{height:clamp(30px,2.8vw,40px)}
 nav.main{display:none;gap:2.1rem;font-size:.86rem;font-weight:500}
 nav.main a{position:relative;padding:.15rem 0;opacity:.82;transition:opacity .3s}
 nav.main a:hover,nav.main a.act{opacity:1}
@@ -513,7 +518,8 @@ footer{background:var(--black);color:#fff;
   .about{grid-template-columns:1.05fr 1fr}
   .two{grid-template-columns:1fr 1fr}
   .disc-grid{grid-template-columns:1fr 1.02fr}
-  .orgs{grid-template-columns:repeat(3,1fr)}
+  /* Two organisers or three, the row fills rather than leaving a gap. */
+  .orgs{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
   .partners{grid-template-columns:repeat(6,1fr)}
   .gal{columns:3;column-gap:1rem}
   .fgrid{grid-template-columns:1.5fr 1fr 1fr 1fr}
