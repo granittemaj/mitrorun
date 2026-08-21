@@ -144,8 +144,10 @@ header.stuck{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);color:v
 /* An uploaded mark replaces the dot and wordmark, so cap it to the lockup's
    height and let the width follow. Without this it prints at natural size and
    pushes the nav off the header. */
-.logo .logo-mark{width:auto;height:clamp(26px,2.4vw,34px);max-width:190px;object-fit:contain}
-footer .logo .logo-mark{height:clamp(30px,2.8vw,40px)}
+/* Sized in em so the mark tracks the wordmark beside it, in the header, the
+   hero and the footer alike, rather than needing a rule per lockup. */
+.logo .logo-mark{width:auto;height:1.75em;max-width:9em;object-fit:contain;flex:0 0 auto}
+.logo .logo-name{white-space:nowrap}
 nav.main{display:none;gap:2.1rem;font-size:.86rem;font-weight:500}
 nav.main a{position:relative;padding:.15rem 0;opacity:.82;transition:opacity .3s}
 nav.main a:hover,nav.main a.act{opacity:1}
@@ -437,6 +439,12 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .orgs{display:grid;gap:1rem}
 .org{border:1px solid var(--line);border-radius:14px;padding:clamp(1.4rem,3vw,2rem);transition:border-color .4s,background .4s}
 .org:hover{border-color:var(--green);background:var(--off)}
+/* Optional organiser logo, sitting above the name. Held to a common height so
+   marks of different proportions still line up across the row. */
+.org-logo{display:block;margin-bottom:1rem}
+.org-logo img{height:38px;width:auto;max-width:100%;object-fit:contain;
+  filter:grayscale(1);opacity:.75;transition:filter .4s var(--e),opacity .4s var(--e)}
+.org:hover .org-logo img{filter:none;opacity:1}
 .org b{display:block;font-size:1.45rem;font-weight:800;letter-spacing:-.035em;margin-bottom:.7rem}
 .org p{color:var(--muted);font-size:.94rem}
 .partners{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
