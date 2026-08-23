@@ -505,16 +505,22 @@ footer{background:var(--black);color:#fff;
    over a dark section rather than relying on a drop shadow to carve it out. */
 #totop{position:fixed;z-index:870;right:clamp(1rem,2.2vw,2rem);
   bottom:calc(5.4rem + env(safe-area-inset-bottom));
-  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  /* A pill on the same 100px radius and 1.6rem side padding as .btn, rather
+     than a circle: every other button on the site is a pill. */
+  height:2.9rem;padding:0 1.6rem;border-radius:100px;display:grid;place-items:center;
   background:var(--black);color:#fff;border:1px solid rgba(255,255,255,.22);
-  font-size:1.1rem;line-height:1;
+  font-size:.82rem;font-weight:700;line-height:1;
   opacity:0;visibility:hidden;transform:translateY(10px);
   transition:background .3s var(--e),border-color .3s var(--e),color .3s,
     opacity .35s var(--e),transform .35s var(--e),visibility .35s}
 #totop.show{opacity:1;visibility:visible;transform:none}
 #totop.show:hover{background:var(--green);border-color:var(--green);color:var(--black);
   transform:translateY(-2px)}
-#totop:hover .ar{transform:translateY(-3px)}
+/* The same arrow character the rest of the site uses, turned to point up, so it
+   renders from the same font. The up arrow sits in a different unicode range
+   and was falling to a different face. */
+#totop .ar{display:block;transform:rotate(-90deg)}
+#totop:hover .ar{transform:rotate(-90deg) translateX(4px)}
 
 #stick{position:fixed;left:0;right:0;bottom:0;z-index:880;display:flex;align-items:center;
   justify-content:space-between;gap:1rem;padding:.7rem var(--gutter) calc(.7rem + env(safe-area-inset-bottom));
