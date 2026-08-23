@@ -2,13 +2,14 @@
 'use strict';
 var d=document,rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-var hd=d.getElementById('hd'),st=d.getElementById('stick'),
+var hd=d.getElementById('hd'),st=d.getElementById('stick'),tt=d.getElementById('totop'),
     navA=[].slice.call(d.querySelectorAll('#nv a')),
     secs=navA.map(function(a){return d.querySelector(a.getAttribute('href'))});
 function sc(){
-  var y=window.scrollY;
+  var y=window.scrollY,past=y>window.innerHeight*0.8;
   hd.classList.toggle('stuck',y>60);
-  st.classList.toggle('show',y>window.innerHeight*0.8);
+  st.classList.toggle('show',past);
+  if(tt)tt.classList.toggle('show',past);
   var cur=-1;
   secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=140)cur=i});
   navA.forEach(function(a,i){a.classList.toggle('act',i===cur)});
