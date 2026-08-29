@@ -439,6 +439,36 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .plist span{color:var(--muted);font-size:.93rem}
 .packshot{border-radius:14px;aspect-ratio:16/10;margin-bottom:1.6rem}
 
+/* ---------- PRIZES ---------- */
+/* One panel per race, each carrying its three places. auto-fit rather than a
+   fixed pair, so adding the 2K later does not need a new rule. */
+.prizes{display:grid;gap:clamp(1rem,2vw,1.6rem);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.pz{--pzp:clamp(1.4rem,3vw,2.2rem);min-width:0;background:#fff;
+  border:1px solid var(--line);border-radius:16px;padding:var(--pzp);
+  transition:border-color .4s var(--e)}
+.pz:hover{border-color:var(--black)}
+.pz-h{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;
+  padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
+.pz-h b{font-size:clamp(2rem,4.5vw,2.8rem);font-weight:900;letter-spacing:-.05em;line-height:.9}
+.pz-h span{font-size:1rem;font-weight:600;color:var(--muted)}
+.pz ol{list-style:none;counter-reset:pz;margin-top:.5rem}
+.pz li{counter-increment:pz;display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:1rem;min-width:0;padding:1.05rem 0;
+  border-bottom:1px solid var(--line)}
+.pz li:last-child{border-bottom:0;padding-bottom:0}
+.pz li::before{content:counter(pz,decimal-leading-zero);font-size:.7rem;font-weight:700;
+  letter-spacing:.12em;color:var(--muted)}
+.pz .pl{font-size:.95rem;font-weight:600;min-width:0}
+.pz .am{font-size:clamp(1.35rem,3vw,1.9rem);font-weight:900;letter-spacing:-.04em;
+  line-height:1;white-space:nowrap}
+/* The winner is a filled band. Near-black on the brand green is the pairing the
+   buttons and the fact bar use, so it clears AA instead of tinting the text. */
+.pz li:first-child{background:var(--green);color:var(--black);border-radius:12px;
+  border-bottom-color:transparent;
+  margin-inline:calc(var(--pzp) * -.5);padding-inline:calc(var(--pzp) * .5)}
+.pz li:first-child::before{color:var(--black)}
+
 /* ---------- ORGS / PARTNERS / FAQ ---------- */
 /* Organisers and partners share this row, so the column count follows however
    many marks there are instead of stranding three in a six-up grid. */

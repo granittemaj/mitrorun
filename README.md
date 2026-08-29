@@ -88,6 +88,11 @@ Three places must stay in sync:
 
 In WordPress all three come from one place, MitroRun → Races.
 
+### Prize money
+The amounts appear in the Shpërblimet section here and, in WordPress, on
+Pages → Home → Prizes. The rulebook repeats them in section 12, so if they
+change, change them there too.
+
 ### Countdown and configuration
 Everything the JavaScript needs sits in one block at the bottom of `index.html`:
 
