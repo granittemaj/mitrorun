@@ -264,7 +264,6 @@ function showRoute(key,animate){
   setFact('m-chip',R.label);
   setFact('f-dist',R.dist);
   setFact('f-time',R.time);
-  setFact('f-elev',R.elev);
   setFact('f-price',R.price);
   activeKm=R.km;updatePace();
 }

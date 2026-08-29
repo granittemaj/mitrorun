@@ -330,9 +330,9 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
   font-size:.8rem;font-weight:700;transition:background .35s var(--e),color .35s,border-color .35s}
 .tab.on{background:var(--green);border-color:var(--green);color:var(--black)}
 .tab:hover:not(.on){border-color:var(--black)}
-.course-facts{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
-.course-facts div{padding:1.1rem 0;border-bottom:1px solid var(--line)}
-.course-facts div:nth-child(even){border-left:1px solid var(--line);padding-left:1.1rem}
+.course-facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.course-facts div{min-width:0;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.course-facts div:not(:first-child){border-left:1px solid var(--line);padding-left:clamp(.7rem,2vw,1.1rem)}
 .course-facts dt{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
 .course-facts dd{font-size:1.25rem;font-weight:800;letter-spacing:-.03em}
 .pace{border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin-top:1.6rem;background:var(--off)}
@@ -569,12 +569,6 @@ footer{background:var(--black);color:#fff;
   .gal{columns:2}
   .news{grid-template-columns:1fr 1fr;gap:3.5rem}
   .fgrid{grid-template-columns:repeat(2,1fr)}
-  .course-facts{grid-template-columns:repeat(4,1fr)}
-  /* One row of four, so every cell but the first takes a divider. Both
-     selectors score the same, and the later one wins; `div + div` would lose
-     to the :nth-child reset above it and leave a single stray rule. */
-  .course-facts div:nth-child(even){border-left:0;padding-left:0}
-  .course-facts div:not(:first-child){border-left:1px solid var(--line);padding-left:1.1rem}
 }
 @media (min-width:960px){
   nav.main{display:flex}

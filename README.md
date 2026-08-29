@@ -112,7 +112,8 @@ notice, so the section keeps its two-column shape. Tabs, facts and the pace
 calculator work either way.
 
 The elevation profile has been removed. It drew one fixed path for all three
-distances, so it presented invented data as a measurement.
+distances, so it presented invented data as a measurement. The Denivelacioni
+fact went the same way: one rounded figure for a route nobody has surveyed.
 
 Flip it to `true` to preview the map. In WordPress the same switch is
 **MitroRun → Settings → Map**, and while it is off Leaflet is never requested at
@@ -126,7 +127,7 @@ square at `42.8901 N, 20.8672 E`.
 To replace them with the real course, swap the `pts` arrays:
 
 ```js
-'10': { label:'10K Liqeni', dist:'10 km', time:'11:00', elev:'~20 m',
+'10': { label:'10K Liqeni', dist:'10 km', time:'11:00',
         price:'20 €', km:10,
         pts:[ [lat,lng], [lat,lng], ... ] }
 ```
