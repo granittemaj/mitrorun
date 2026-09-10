@@ -526,9 +526,17 @@ footer{background:var(--black);color:#fff;
 .fgrid a{color:rgba(255,255,255,.82);transition:color .25s}
 .fgrid a:hover{color:var(--green)}
 /* Contact under the footer blurb. The Kontakt column is gone, and an address
-   and two profiles do not need one back. */
-.fmeta{margin-top:1.2rem;display:grid;gap:.5rem;justify-items:start;font-size:.92rem}
-.fmeta .soc{display:flex;flex-wrap:wrap;gap:.4rem 1rem}
+   and three marks do not need one back. */
+.fmeta{margin-top:1.3rem;display:grid;gap:.9rem;justify-items:start;font-size:.92rem}
+.fmeta .soc{display:flex;flex-wrap:wrap;gap:.5rem}
+/* The same square with a 14px corner as the back to top button, and the same
+   green fill carrying near-black content on hover that every control uses. */
+.fmeta .soc a{width:2.6rem;height:2.6rem;display:grid;place-items:center;border-radius:14px;
+  border:1px solid var(--line-dk);color:rgba(255,255,255,.82);
+  transition:background .3s var(--e),border-color .3s var(--e),color .3s,transform .3s var(--e)}
+.fmeta .soc a:hover{background:var(--green);border-color:var(--green);color:var(--black);
+  transform:translateY(-2px)}
+.fmeta .soc svg{width:1.15rem;height:1.15rem;display:block}
 
 .fbot{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line-dk);display:flex;
   flex-wrap:wrap;gap:.6rem 1.6rem;font-size:.74rem;color:var(--muted-dk)}
