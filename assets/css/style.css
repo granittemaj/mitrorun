@@ -525,6 +525,11 @@ footer{background:var(--black);color:#fff;
 .fgrid ul{list-style:none;display:grid;gap:.55rem;font-size:.94rem}
 .fgrid a{color:rgba(255,255,255,.82);transition:color .25s}
 .fgrid a:hover{color:var(--green)}
+/* Contact under the footer blurb. The Kontakt column is gone, and an address
+   and two profiles do not need one back. */
+.fmeta{margin-top:1.2rem;display:grid;gap:.5rem;justify-items:start;font-size:.92rem}
+.fmeta .soc{display:flex;flex-wrap:wrap;gap:.4rem 1rem}
+
 .fbot{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line-dk);display:flex;
   flex-wrap:wrap;gap:.6rem 1.6rem;font-size:.74rem;color:var(--muted-dk)}
 /* Back to top. Sits clear of the fixed CTA bar on small screens, where that bar

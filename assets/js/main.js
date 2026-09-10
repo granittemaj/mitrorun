@@ -27,7 +27,7 @@ mn.addEventListener('click',function(e){
 });
 
 var CFG=window.MitroRun||{};
-var T=new Date(CFG.raceDate||'2026-10-04T11:00:00+02:00').getTime(),
+var T=new Date(CFG.raceDate||'2026-10-18T11:00:00+02:00').getTime(),
     E={d:d.getElementById('cd-d'),h:d.getElementById('cd-h'),m:d.getElementById('cd-m'),s:d.getElementById('cd-s')};
 function p2(n){return n<10?'0'+n:''+n}
 function tick(){

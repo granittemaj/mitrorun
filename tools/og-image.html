@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Archivo';src:url('../assets/fonts/archivo-latin-ext-400-normal.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'Archivo';src:url('../assets/fonts/archivo-latin-ext-800-normal.woff2') format('woff2');font-weight:800;font-display:block}
+@font-face{font-family:'Archivo';src:url('../assets/fonts/archivo-latin-ext-900-normal.woff2') format('woff2');font-weight:900;font-display:block}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:#0A0B0A;color:#fff;font-family:'Archivo',sans-serif;position:relative}
+.ghost{position:absolute;inset:0;overflow:hidden;color:#182018;
+  font-size:131px;font-weight:900;line-height:180px;white-space:nowrap;padding-top:29px}
+.in{position:absolute;left:72px;top:141px;right:0}
+h1{font-size:112px;font-weight:900;line-height:118px;letter-spacing:normal;transform:scaleX(1.172);transform-origin:left top}
+h1 .g{color:#25B34C}
+.brand{position:absolute;left:72px;bottom:70px;display:flex;align-items:center;gap:13px;
+  font-size:25px;font-weight:800;letter-spacing:.02em}
+.dot{width:16px;height:16px;border-radius:50%;background:#25B34C}
+.meta{position:absolute;left:72px;bottom:30px;font-size:21px;font-weight:400;color:#8A918B}
+</style></head><body>
+<div class="ghost">
+  <div style="transform:translateX(-14px)">MITROVICE&nbsp; 18.10.2026&nbsp; MITROVICE</div>
+  <div style="transform:translateX(-150px)">MITROVICE&nbsp; 18.10.2026&nbsp; MITROVICE</div>
+  <div style="transform:translateX(-286px)">MITROVICE&nbsp; 18.10.2026&nbsp; MITROVICE</div>
+  <div style="transform:translateX(-422px)">MITROVICE&nbsp; 18.10.2026&nbsp; MITROVICE</div>
+          </div>
+<div class="in"><h1>Një qytet.<br>Tri distanca.<br><span class="g">Një ditë.</span></h1></div>
+<div class="brand"><span class="dot"></span>MITRORUN</div>
+<div class="meta">18.10.2026 &nbsp;·&nbsp; Sheshi Adem Jashari, Mitrovicë</div>
+</body></html>
+<!--
+  Source for assets/img/og-image.png, the 1200x630 social preview.
+
+  The date is baked into the picture, so it has to be re-rendered whenever the
+  race date moves. Serve the repo and screenshot this page at 1200x630:
+
+    python3 -m http.server 8000
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+      --window-size=1200,630 --default-background-color=0A0B0AFF \
+      --screenshot=assets/img/og-image.png http://localhost:8000/tools/og-image.html
+
+  The headline is scaled horizontally rather than tracked out: the original was
+  set in a wider cut of Archivo than the static weights shipped here, and adding
+  letter-spacing gave the right width with visibly wrong texture.
+
+  Copy the result to the theme's assets/img/ as well.
+-->

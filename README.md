@@ -1,7 +1,7 @@
 # MitroRun 2026
 
 Landing page for MitroRun, the city run of Mitrovica, Kosovo.
-4 October 2026, start and finish at Sheshi Adem Jashari.
+18 October 2026, start and finish at Sheshi Adem Jashari.
 
 Organised by **7ARTE** and the running club **MitRun**.
 Built by [PAPINGU](https://papingu.com).
@@ -46,6 +46,7 @@ Total page weight excluding photographs and map tiles: roughly 250 KB.
 ```
 .
 ├── index.html                  single page, all sections + runtime config
+├── tools/og-image.html      source for the social preview, re-render when the date moves
 ├── assets/
 │   ├── css/style.css           design tokens + all styles (copy of the theme's main.css)
 │   ├── js/main.js              nav, countdown, reveals, gallery, maps, pace tool (copy of the theme's main.js)
@@ -75,6 +76,10 @@ Upload the folder. There is nothing to compile.
 Set the real domain in `index.html`: the `canonical`, `og:url` and `og:image` tags
 currently point at `https://mitrorun.com/`.
 
+The social preview at `assets/img/og-image.png` has the date printed on it. It is
+generated from `tools/og-image.html`; the instructions are at the bottom of that
+file. Re-render it and copy it to the theme whenever the date changes.
+
 ---
 
 ## Editing content
@@ -99,7 +104,7 @@ Everything the JavaScript needs sits in one block at the bottom of `index.html`:
 ```js
 window.MitroRun = {
   showMap: false,
-  raceDate: '2026-10-04T11:00:00+02:00',
+  raceDate: '2026-10-18T11:00:00+02:00',
   start: [42.8901, 20.8672],
   routes: { ... }
 };
@@ -177,7 +182,6 @@ All tokens are at the top of `assets/css/style.css`:
 - [ ] Set the real domain and re-check the Open Graph tags
 - [ ] Decide on CARTO tiles vs a paid provider if race-weekend traffic is expected
 - [ ] Add a cookie and privacy page if any analytics are introduced
-- [ ] Register the Instagram and Facebook handles used in the footer
 
 ## Licence and credits
 
