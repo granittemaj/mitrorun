@@ -265,6 +265,10 @@ function showRoute(key,animate){
   setFact('f-dist',R.dist);
   setFact('f-time',R.time);
   setFact('f-price',R.price);
+  // The course file follows the selected tab, and goes away when that route
+  // has none rather than offering a link to nothing.
+  var dl=d.getElementById('gpx-dl');
+  if(dl){if(R.gpx){dl.href=R.gpx;dl.hidden=false}else{dl.removeAttribute('href');dl.hidden=true}}
   activeKm=R.km;updatePace();
 }
 

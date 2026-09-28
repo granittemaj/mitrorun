@@ -77,6 +77,7 @@
   --e:cubic-bezier(.19,1,.22,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--f);background:var(--white);color:var(--black);
   font-size:clamp(.96rem,.4vw + .86rem,1.05rem);line-height:1.6;
@@ -335,6 +336,7 @@ nav.main a:hover::after,nav.main a.act::after{width:100%}
 .course-facts div:not(:first-child){border-left:1px solid var(--line);padding-left:clamp(.7rem,2vw,1.1rem)}
 .course-facts dt{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
 .course-facts dd{font-size:1.25rem;font-weight:800;letter-spacing:-.03em}
+.course-dl{margin-top:1.4rem}
 .pace{border:1px solid var(--line);border-radius:16px;padding:1.5rem;margin-top:1.6rem;background:var(--off)}
 .pace .row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1rem}
 .pace output{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}

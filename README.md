@@ -126,24 +126,35 @@ all. The mockup still loads Leaflet either way, so the flag can be flipped
 without editing the markup.
 
 ### Course routes
-Routes are **indicative sketches**, not surveyed. They are plotted by hand from the
-square at `42.8901 N, 20.8672 E`.
+These are the **organiser's own courses**, taken from the GPX files on the live
+site and rounded to five decimal places, about a metre:
 
-To replace them with the real course, swap the `pts` arrays:
+| Route | Points | Measured |
+|---|---|---|
+| 10K Liqeni | 435 | 9.91 km |
+| 5K Lumi | 352 | 4.99 km |
+| 2K Shotat | 120 | 2.02 km |
+
+To swap in a new course, replace the `pts` array:
 
 ```js
 '10': { label:'10K Liqeni', dist:'10 km', time:'11:00',
-        price:'20 €', km:10,
+        price:'20 €', km:10, gpx:'https://…/MitroRun_10km.gpx',
         pts:[ [lat,lng], [lat,lng], ... ] }
 ```
 
 Everything else recalculates itself: kilometre markers are placed by measuring real
-haversine distance along the line, and the map refits its bounds per route. A GPX
-export from Strava converts to this format in a few lines. In WordPress you upload
-the GPX directly and this is done for you.
+haversine distance along the line, and the map refits its bounds per route. In
+WordPress you upload the GPX to the race and this is done for you.
+
+`gpx` is the download the **Shkarko GPX** button offers, and it follows the
+selected tab. In WordPress the link goes through the plugin rather than straight
+at the file, because the web server has no mapping for the extension and hands a
+GPX out as `text/plain`, which a phone shows as markup instead of passing to a
+maps app.
 
 Remove the "Skicë" disclaimer in the map legend once the course is approved by the
-municipality.
+municipality. The files are the organiser's, but approval is a separate thing.
 
 ### Photography
 Every photograph is a **placeholder hot-linked from Pexels**, chosen to match the
@@ -174,7 +185,6 @@ All tokens are at the top of `assets/css/style.css`:
 - [ ] Confirm the 5K start time. It is set to 11:30 here and in the WordPress seed
       data, not 11:00 as in the original brief, because two waves cannot leave one
       start line at the same minute
-- [ ] Replace indicative routes with the official GPX
 - [ ] Add real partner logos, currently numbered placeholders
 - [ ] Replace all Pexels photography with real Mitrovica images, with written model
       releases — this is a legal requirement, not a preference, and it applies
