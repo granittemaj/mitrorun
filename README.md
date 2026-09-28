@@ -35,7 +35,7 @@ come back with Polylang or WPML.
 | Markup | Static HTML | No build step, deploys anywhere, easy to hand over |
 | Styles | One CSS file, custom properties | Design tokens live in `:root`, no framework weight |
 | Scripts | Vanilla JS, no dependencies | ~10 KB, no bundler |
-| Maps | [Leaflet](https://leafletjs.com) 1.9.4 + OpenStreetMap tiles via CARTO | Free, no API key for the prototype |
+| Maps | [Leaflet](https://leafletjs.com) 1.9.4 + OpenStreetMap tiles | No API key; drained and inverted in CSS for the dark panel |
 | Fonts | Archivo, self-hosted (SIL OFL 1.1) | No Google Fonts request, so no consent banner needed for fonts |
 | Photography | Pexels, hot-linked | Placeholder only, see below |
 
@@ -103,7 +103,7 @@ Everything the JavaScript needs sits in one block at the bottom of `index.html`:
 
 ```js
 window.MitroRun = {
-  showMap: false,
+  showMap: true,
   raceDate: '2026-10-18T11:00:00+02:00',
   start: [42.8901, 20.8672],
   routes: { ... }
@@ -111,19 +111,25 @@ window.MitroRun = {
 ```
 
 ### The course map
-`showMap` is **off**, matching the shipped default, because the route is not yet
-approved by the municipality. The panel still renders, carrying a **Coming soon**
-notice, so the section keeps its two-column shape. Tabs, facts and the pace
-calculator work either way.
+`showMap` is **on**. Set it to `false` and swap the panel for the `.panel.soon`
+variant, which carries a **Coming soon** notice in place of `#courseMap` so the
+section keeps its two-column shape. Tabs, facts, the download and the pace
+calculator work either way. In WordPress the switch is **MitroRun → Settings →
+Map**, the panel swap is done for you, and while it is off Leaflet is never
+requested at all.
+
+Tiles come from **OpenStreetMap**, which needs no key.
+`#courseMap .leaflet-tile-pane` drains and inverts them, which is what gives the
+dark map the design asks for. The filter is on the tile pane rather than the
+whole map, so the route and the markers keep their colour.
+
+> CARTO used to serve this and is no longer an option without an account: its
+> basemaps answer **200 with a tile that reads "API KEY REQUIRED"** rather than
+> an error, so the map goes grey with nothing in the console to explain it.
 
 The elevation profile has been removed. It drew one fixed path for all three
 distances, so it presented invented data as a measurement. The Denivelacioni
 fact went the same way: one rounded figure for a route nobody has surveyed.
-
-Flip it to `true` to preview the map. In WordPress the same switch is
-**MitroRun → Settings → Map**, and while it is off Leaflet is never requested at
-all. The mockup still loads Leaflet either way, so the flag can be flipped
-without editing the markup.
 
 ### Course routes
 These are the **organiser's own courses**, taken from the GPX files on the live
@@ -190,12 +196,13 @@ All tokens are at the top of `assets/css/style.css`:
       releases — this is a legal requirement, not a preference, and it applies
       especially to children in the 2K
 - [ ] Set the real domain and re-check the Open Graph tags
-- [ ] Decide on CARTO tiles vs a paid provider if race-weekend traffic is expected
+- [ ] Move to a tile provider with a usage agreement before race weekend. OpenStreetMap's
+      own tiles are fine for review traffic, not for a race-day spike
 - [ ] Add a cookie and privacy page if any analytics are introduced
 
 ## Licence and credits
 
-- Map data © OpenStreetMap contributors, tiles © CARTO
+- Map data and tiles © OpenStreetMap contributors
 - Archivo typeface, SIL Open Font License 1.1, see `assets/fonts/LICENSE-Archivo.txt`
 - Placeholder photography from Pexels, free licence, to be replaced
 - Site code © 2026 MitroRun / PAPINGU

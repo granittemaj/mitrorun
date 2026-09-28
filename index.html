@@ -282,18 +282,22 @@
       </div>
 
       <div class="rv">
-        <div class="panel soon">
+        <!-- With showMap off this is the .panel.soon variant instead: the same
+             shell, with a Coming soon notice in place of #courseMap. -->
+        <div class="panel">
           <div class="panel-top">
             <div class="who">
               <span class="chip" id="m-chip">&mdash;</span>
               <span class="where">Mitrovicë · Kosovë</span>
             </div>
           </div>
-          <div class="panel-map">
-            <div class="soon-in">
-              <span class="soon-tag">Coming soon</span>
-              <p>Hartat e garës publikohen pas miratimit të traseve nga komuna.</p>
-            </div>
+
+          <div class="panel-map"><div id="courseMap"></div></div>
+
+          <div class="panel-legend">
+            <span><i class="s"></i>Start / Finish</span>
+            <span><i class="k"></i>Shenja kilometrike</span>
+            <span><i class="r"></i>Itinerari</span>
           </div>
         </div>
       </div>
@@ -612,7 +616,7 @@
 window.MitroRun = {
   // Course map is off until the route is approved by the municipality.
   // In WordPress this is MitroRun > Settings > Map. Flip to true to preview it.
-  showMap: false,
+  showMap: true,
   raceDate: '2026-10-18T11:00:00+02:00',
   start: [42.8901, 20.8672],
   i18n: { startFinish:'Start / Finish', km:'km', minKm:'min/km' },

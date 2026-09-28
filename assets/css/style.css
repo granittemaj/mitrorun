@@ -356,8 +356,15 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   background:var(--green);font-size:.7rem;font-weight:800}
 .panel-top .where{font-size:.68rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted-dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.panel-map{position:relative;aspect-ratio:4/5}
-#courseMap{position:absolute;inset:0;filter:saturate(.22)}
+ /* Capped as well as proportioned: on a wide screen a 4:5 box on a 900px column
+   is over a thousand pixels tall, which is taller than the panel it sits in is
+   allowed to be and taller than the sticky position can hold. */
+.panel-map{position:relative;aspect-ratio:4/5;max-height:min(72vh,600px)}
+#courseMap{position:absolute;inset:0}
+/* The tiles are light and coloured; the panel is near black. Inverting and
+   draining them gives the dark map the design asks for without a paid provider.
+   It is on the tile pane alone, so the route and the markers keep their colour. */
+#courseMap .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.92) contrast(.92)}
 /* No map yet: the panel keeps its shape and says so, rather than leaving the
    column empty or collapsing the section to a narrow measure. */
 .panel.soon .panel-map{display:grid;place-items:center;
@@ -598,7 +605,7 @@ footer{background:var(--black);color:#fff;
   .fgrid{grid-template-columns:1.4fr repeat(3,1fr);gap:2.4rem}
   .course-grid{grid-template-columns:.92fr 1.08fr;gap:3.2rem;align-items:start}
   .panel{position:sticky;top:6rem}
-  .panel-map{aspect-ratio:3/4}
+  .panel-map{aspect-ratio:3/4;max-height:min(76vh,660px)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}

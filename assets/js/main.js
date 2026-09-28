@@ -164,9 +164,12 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
 /* ================= MAPS ================= */
 var START=CFG.start||[42.8901,20.8672];
 var ROUTES=CFG.routes||{};
-var ATTR='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
-var BASE=CFG.mapTiles||'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png';
-var LABELS=CFG.mapLabels||'https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png';
+var BASE=CFG.mapTiles||'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+var LABELS=CFG.mapLabels||'';
+// OSM data sits under every provider here, so its notice always applies; the
+// provider's own is added when the URL says who that is.
+var ATTR='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+if(/carto/i.test(BASE))ATTR+=' &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function hav(a,b){
   var R=6371000,t=Math.PI/180,dLa=(b[0]-a[0])*t,dLo=(b[1]-a[1])*t;
@@ -219,7 +222,8 @@ var mapEl=d.getElementById('courseMap'),
 if(useMap){
   cm=L.map('courseMap',{zoomControl:true,scrollWheelZoom:false,attributionControl:true,zoomSnap:.25});
   L.tileLayer(BASE,{attribution:ATTR,maxZoom:19,subdomains:'abcd'}).addTo(cm);
-  L.tileLayer(LABELS,{maxZoom:19,subdomains:'abcd',opacity:.72}).addTo(cm);
+  // Only a provider that splits them needs a second layer. OSM bakes its labels in.
+  if(LABELS)L.tileLayer(LABELS,{maxZoom:19,subdomains:'abcd',opacity:.72}).addTo(cm);
   cm.on('click',function(){cm.scrollWheelZoom.enable()});
   cm.on('mouseout',function(){cm.scrollWheelZoom.disable()});
 
@@ -234,7 +238,15 @@ if(useMap){
 function setFact(id,val){var n=d.getElementById(id);if(n)n.textContent=val}
 
 function drawRoute(R,animate){
-  var pts=densify(R.pts,15),cs=cumul(pts),len=cs[cs.length-1];
+  var pts=densify(R.pts||[],15);
+  // A race whose GPX has not been attached yet. Show the start line instead of
+  // asking Leaflet to fit empty bounds, which throws.
+  if(pts.length<2){
+    halo.setLatLngs([]);line.setLatLngs([]);markerGrp.clearLayers();
+    cm.invalidateSize();cm.setView(START,14);
+    return;
+  }
+  var cs=cumul(pts),len=cs[cs.length-1];
   halo.setLatLngs(pts);
   cm.invalidateSize();
   cm.fitBounds(L.latLngBounds(pts).pad(0.16));
@@ -260,7 +272,6 @@ function drawRoute(R,animate){
 function showRoute(key,animate){
   var R=ROUTES[key];
   if(!R)return;
-  if(useMap)drawRoute(R,animate);
   setFact('m-chip',R.label);
   setFact('f-dist',R.dist);
   setFact('f-time',R.time);
@@ -270,6 +281,8 @@ function showRoute(key,animate){
   var dl=d.getElementById('gpx-dl');
   if(dl){if(R.gpx){dl.href=R.gpx;dl.hidden=false}else{dl.removeAttribute('href');dl.hidden=true}}
   activeKm=R.km;updatePace();
+  // Last, and guarded: whatever the map does, the numbers above are already set.
+  if(useMap){try{drawRoute(R,animate)}catch(e){}}
 }
 
 if(Object.keys(ROUTES).length){
