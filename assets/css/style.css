@@ -356,10 +356,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   background:var(--green);font-size:.7rem;font-weight:800}
 .panel-top .where{font-size:.68rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted-dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
- /* Capped as well as proportioned: on a wide screen a 4:5 box on a 900px column
-   is over a thousand pixels tall, which is taller than the panel it sits in is
-   allowed to be and taller than the sticky position can hold. */
-.panel-map{position:relative;aspect-ratio:4/5;max-height:min(72vh,600px)}
+/* A height rather than a ratio. A ratio alone ran to over a thousand pixels on
+   a wide column, and capping it with max-height was worse: with a definite
+   height the browser recomputes the width from the ratio too, so the map
+   covered only part of its own panel. */
+.panel-map{position:relative;height:clamp(340px,64vh,560px)}
 #courseMap{position:absolute;inset:0}
 /* The tiles are light and coloured; the panel is near black. Inverting and
    draining them gives the dark map the design asks for without a paid provider.
@@ -370,7 +371,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .panel.soon .panel-map{display:grid;place-items:center;
   /* A real map earns a tall 4:5 frame. An empty one does not, and the left
      column is shorter without the elevation profile, so keep the two close. */
-  aspect-ratio:auto;min-height:clamp(300px,26vw,420px);
+  height:auto;min-height:clamp(300px,26vw,420px);
   background:
     linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/100% 34px,
     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/34px 100%,
@@ -605,7 +606,7 @@ footer{background:var(--black);color:#fff;
   .fgrid{grid-template-columns:1.4fr repeat(3,1fr);gap:2.4rem}
   .course-grid{grid-template-columns:.92fr 1.08fr;gap:3.2rem;align-items:start}
   .panel{position:sticky;top:6rem}
-  .panel-map{aspect-ratio:3/4;max-height:min(76vh,660px)}
+  .panel-map{height:min(74vh,660px)}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
