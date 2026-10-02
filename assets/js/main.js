@@ -4,11 +4,19 @@ var d=document,rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 var hd=d.getElementById('hd'),st=d.getElementById('stick'),tt=d.getElementById('totop'),
     navA=[].slice.call(d.querySelectorAll('#nv a')),
-    secs=navA.map(function(a){return d.querySelector(a.getAttribute('href'))});
+    /* Links are '#id' on the front page and 'https://site/#id' elsewhere, which
+       is not a valid selector. Read the fragment and look it up by id, so a link
+       to a section this page does not have is simply skipped. */
+    secs=navA.map(function(a){
+      var h=a.getAttribute('href')||'',i=h.indexOf('#');
+      if(i<0||i===h.length-1)return null;
+      try{return d.getElementById(decodeURIComponent(h.slice(i+1)))}catch(e){return null}
+    });
 function sc(){
   var y=window.scrollY,past=y>window.innerHeight*0.8;
   hd.classList.toggle('stuck',y>60);
-  st.classList.toggle('show',past);
+  /* The sticky bar and back-to-top button are front page only. */
+  if(st)st.classList.toggle('show',past);
   if(tt)tt.classList.toggle('show',past);
   var cur=-1;
   secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=140)cur=i});
@@ -27,7 +35,7 @@ mn.addEventListener('click',function(e){
 });
 
 var CFG=window.MitroRun||{};
-var T=new Date(CFG.raceDate||'2026-10-18T11:00:00+02:00').getTime(),
+var T=new Date(CFG.raceDate||'2026-10-18T13:00:00+02:00').getTime(),
     E={d:d.getElementById('cd-d'),h:d.getElementById('cd-h'),m:d.getElementById('cd-m'),s:d.getElementById('cd-s')};
 function p2(n){return n<10?'0'+n:''+n}
 function tick(){

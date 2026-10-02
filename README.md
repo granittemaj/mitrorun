@@ -104,7 +104,7 @@ Everything the JavaScript needs sits in one block at the bottom of `index.html`:
 ```js
 window.MitroRun = {
   showMap: true,
-  raceDate: '2026-10-18T11:00:00+02:00',
+  raceDate: '2026-10-18T13:00:00+02:00',
   start: [42.8901, 20.8672],
   routes: { ... }
 };
@@ -144,7 +144,7 @@ site and rounded to five decimal places, about a metre:
 To swap in a new course, replace the `pts` array:
 
 ```js
-'10': { label:'10K Liqeni', dist:'10 km', time:'11:00',
+'10': { label:'10K Liqeni', dist:'10 km', time:'13:30',
         price:'20 €', km:10, gpx:'https://…/MitroRun_10km.gpx',
         pts:[ [lat,lng], [lat,lng], ... ] }
 ```
@@ -188,9 +188,9 @@ All tokens are at the top of `assets/css/style.css`:
 
 - [ ] Turn the course map back on once the route is approved. Until then the
       panel shows a Coming soon notice in its place
-- [ ] Confirm the 5K start time. It is set to 11:30 here and in the WordPress seed
-      data, not 11:00 as in the original brief, because two waves cannot leave one
-      start line at the same minute
+- [ ] Confirm the 5K and 10K both start at 13:30, as the organiser supplied. Two
+      waves cannot leave one start line at the same minute, so check whether they
+      are staggered or run as one start
 - [ ] Add real partner logos, currently numbered placeholders
 - [ ] Replace all Pexels photography with real Mitrovica images, with written model
       releases — this is a legal requirement, not a preference, and it applies
