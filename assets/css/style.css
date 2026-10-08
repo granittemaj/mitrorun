@@ -462,6 +462,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
 .pz-h b{font-size:clamp(2rem,4.5vw,2.8rem);font-weight:900;letter-spacing:-.05em;line-height:.9}
 .pz-h span{font-size:1rem;font-weight:600;color:var(--muted)}
+/* Says on the panel itself that the places are paid to women and to men alike,
+   rather than leaving it to the intro above. Same pill as .soon-tag. */
+.pz-h .pz-g{margin-left:auto;align-self:center;padding:.35rem .75rem;border:1px solid var(--line);
+  border-radius:100px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--black);white-space:nowrap}
 .pz ol{list-style:none;counter-reset:pz;margin-top:.5rem}
 .pz li{counter-increment:pz;display:grid;grid-template-columns:auto 1fr auto;
   align-items:center;gap:1rem;min-width:0;padding:1.05rem 0;
