@@ -462,21 +462,29 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
 .pz-h b{font-size:clamp(2rem,4.5vw,2.8rem);font-weight:900;letter-spacing:-.05em;line-height:.9}
 .pz-h span{font-size:1rem;font-weight:600;color:var(--muted)}
-/* Says on the panel itself that the places are paid to women and to men alike,
-   rather than leaving it to the intro above. Same pill as .soon-tag. */
-.pz-h .pz-g{margin-left:auto;align-self:center;padding:.35rem .75rem;border:1px solid var(--line);
-  border-radius:100px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--black);white-space:nowrap}
-.pz ol{list-style:none;counter-reset:pz;margin-top:.5rem}
-.pz li{counter-increment:pz;display:grid;grid-template-columns:auto 1fr auto;
-  align-items:center;gap:1rem;min-width:0;padding:1.05rem 0;
+/* Every place is paid to a woman and to a man, so each row carries the amount
+   twice under a Femra and a Meshkuj head. The rows and the heads share one set
+   of columns through subgrid, so the amounts line up with their head however
+   long the client writes them ("500 € + fanellë" included). */
+.pz-t{display:grid;grid-template-columns:auto 1fr auto auto;column-gap:clamp(.7rem,2vw,1.2rem)}
+.pz-cols,.pz ol,.pz li{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto auto;
+  column-gap:clamp(.7rem,2vw,1.2rem)}
+@supports (grid-template-columns:subgrid){
+  .pz-cols,.pz ol,.pz li{grid-template-columns:subgrid}
+}
+.pz-cols{padding:1rem 0 .3rem;font-size:.62rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.pz-cols span{display:flex;align-items:center;justify-content:flex-end;gap:.3rem}
+.pz-cols svg{width:.9rem;height:.9rem;flex:0 0 auto}
+.pz ol{list-style:none;counter-reset:pz;margin-top:.2rem}
+.pz li{counter-increment:pz;align-items:center;min-width:0;padding:1.05rem 0;
   border-bottom:1px solid var(--line)}
 .pz li:last-child{border-bottom:0;padding-bottom:0}
 .pz li::before{content:counter(pz,decimal-leading-zero);font-size:.7rem;font-weight:700;
   letter-spacing:.12em;color:var(--muted)}
 .pz .pl{font-size:.95rem;font-weight:600;min-width:0}
-.pz .am{font-size:clamp(1.35rem,3vw,1.9rem);font-weight:900;letter-spacing:-.04em;
-  line-height:1;white-space:nowrap}
+.pz .am{font-size:clamp(1.1rem,2.2vw,1.45rem);font-weight:900;letter-spacing:-.04em;
+  line-height:1;white-space:nowrap;text-align:right}
 /* The winner is a filled band. Near-black on the brand green is the pairing the
    buttons and the fact bar use, so it clears AA instead of tinting the text. */
 .pz li:first-child{background:var(--green);color:var(--black);border-radius:12px;
