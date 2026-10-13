@@ -494,7 +494,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
 /* ---------- ORGS / PARTNERS / FAQ ---------- */
 /* Two framed groups, each under its own label: the organisers on one row,
-   then the sponsors up to five to a row (two on a phone). A fixed
+   then the sponsors four or five to a row, whichever fills the rows (see
+   mitrorun_partner_columns()), two on a phone. A fixed
    count rather than auto-fit, which on a wide screen put nine marks on a line
    and four on the next. --n is the number of marks, capped in the template, so
    a short row never stretches thin. A part-filled last row is centred. */
