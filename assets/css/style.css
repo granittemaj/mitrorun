@@ -495,8 +495,14 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 /* ---------- ORGS / PARTNERS / FAQ ---------- */
 /* Organisers and partners share this row, so the column count follows however
    many marks there are instead of stranding three in a six-up grid. */
-.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1px;background:var(--line);
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1px;background:#fff;
   border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:1.4rem}
+/* The hairlines come from each tile, not from the grid showing through the gaps.
+   With the grid painted in the line colour, a last row that was not full (13
+   marks on an 8-column row, say) left solid grey blocks where tiles were
+   missing. The tile's own 1px shadow lands in the gap beside it, so cells with
+   no tile stay white, and the outer edge is clipped to the frame's border. */
+.partner{box-shadow:0 0 0 1px var(--line)}
 /* No aspect-ratio here: it gave every tile a definite height, so a short logo
    kept that height while the row grew to the tallest one, leaving the grid's
    own background showing underneath. A min-height plus the default stretch
@@ -505,8 +511,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   padding:clamp(1rem,2vw,1.6rem);font-size:.64rem;
   font-weight:600;letter-spacing:.16em;color:#B4BAB5;transition:color .35s,background .35s}
 /* Capped in absolute units. A percentage resolved against the tile's own height
-   and left tall marks free to stretch the row. */
-.partner img{max-width:100%;max-height:clamp(44px,4.6vw,68px);width:auto;height:auto;object-fit:contain;
+   and left tall marks free to stretch the row. The cap allows for marks
+   supplied on a padded 2.4:1 canvas, which carry their own breathing room. */
+.partner img{max-width:100%;max-height:clamp(56px,6vw,76px);width:auto;height:auto;object-fit:contain;
   filter:grayscale(1);opacity:.7;transition:filter .4s var(--e),opacity .4s var(--e)}
 .partner:hover img{filter:none;opacity:1}
 .partner:hover{background:var(--off);color:var(--green)}
