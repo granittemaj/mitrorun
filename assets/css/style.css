@@ -494,7 +494,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
 /* ---------- ORGS / PARTNERS / FAQ ---------- */
 /* Two framed groups, each under its own label: the organisers on one row,
-   then the sponsors four to a row (two on a phone, three on a tablet). A fixed
+   then the sponsors up to five to a row (two on a phone). A fixed
    count rather than auto-fit, which on a wide screen put nine marks on a line
    and four on the next. --n is the number of marks, capped in the template, so
    a short row never stretches thin. A part-filled last row is centred. */
@@ -504,8 +504,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .partners-lbl{margin-top:clamp(1.6rem,3vw,2.4rem)}
 .head + .partners-lbl{margin-top:0}
 .partners-support{--cols:2}
-@media (min-width:680px){.partners-support{--cols:min(var(--n,4),3)}}
-@media (min-width:960px){.partners-support{--cols:var(--n,4)}}
+@media (min-width:680px){.partners-support{--cols:var(--n,5)}}
 .partners-lead .partner{min-height:clamp(128px,13vw,200px);padding:clamp(.5rem,2vw,1.6rem)}
 .partners-lead .partner img{max-height:clamp(60px,7.5vw,104px)}
 /* The hairlines come from each tile, not from the grid showing through the gaps.
