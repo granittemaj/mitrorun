@@ -667,7 +667,9 @@ footer{background:var(--black);color:#fff;
 
 .rr-ui{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1rem 1.6rem;margin-bottom:1.4rem}
 .rr-ui:not(.ready){visibility:hidden}
-.rr-filters{display:grid;gap:.6rem}
+.rr-filters{display:grid;gap:.7rem}
+.rr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem}
+.rr-lbl{flex:0 0 7.5rem}
 .rr-tabs{margin-bottom:0}
 .rr-tabs .tab{background:#fff}
 .rr-tabs .tab.on{background:var(--green)}
@@ -731,6 +733,7 @@ footer{background:var(--black);color:#fff;
      at 375px the search field and PDF button pushed the page to 417. */
   .rr-ui{display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
   .rr-ui > *,.rr-tools > *{min-width:0}
+  .rr-row{display:grid;gap:.5rem}
   .rr-tools{display:grid;grid-template-columns:minmax(0,1fr) auto}
   .rr-search{width:auto}
   #divRRPublish .MainDiv{padding:0 .4rem .4rem}

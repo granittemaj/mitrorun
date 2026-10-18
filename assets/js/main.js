@@ -185,7 +185,7 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
     '<Show All>':'Të gjitha','<Overall>':'Të gjithë','Female':'Femra','Male':'Meshkuj',
     'Pl.':'Vendi','Bib':'Nr.','Name':'Emri','Finish':'Koha','Race Pace':'Ritmi',
     'Time':'Koha','Club':'Klubi','Nation':'Shteti','Age Group':'Grupmosha','Gender':'Gjinia'};
-  var GROUPS=['Gara','Kategoria'];
+  var GROUPS=['Garat','Sipas gjinisë'];
 
   var ui=d.createElement('div');
   ui.className='rr-ui';
@@ -194,7 +194,7 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
     '<div class="rr-tools">'+
       '<form class="field rr-search" role="search">'+
         '<label class="screen-reader-text" for="rr-q">Kërko emrin ose numrin</label>'+
-        '<input id="rr-q" type="search" placeholder="Emri ose numri" autocomplete="off">'+
+        '<input id="rr-q" type="search" placeholder="Emri ose nr." autocomplete="off">'+
         '<button class="btn sm" type="submit">Kërko</button>'+
       '</form>'+
       '<button class="btn ghost sm rr-pdf" type="button">Shkarko PDF</button>'+
@@ -203,9 +203,12 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
   var filters=ui.querySelector('.rr-filters');
 
   function selects(){return [].slice.call(rr.querySelectorAll('.RRSelectorDesktop select'))}
-  // The two RaceResult selects both offer <Show All>; it means every race in
-  // the first and both genders, grouped, in the second.
-  var SHOW_ALL=['Të gjitha garat','Sipas gjinisë'];
+  // The two RaceResult selects both offer <Show All>: every race in the first,
+  // both genders (grouped, Femra then Meshkuj) in the second.
+  var SHOW_ALL=['Të gjitha garat','Të gjithë'];
+  // RaceResult's <Overall> ranks women and men in one list. The filter offers
+  // Të gjithë, Femra and Meshkuj only, so that option is left out.
+  var SKIP={'<Ignore>':1};
   function label(t,i){t=(t||'').trim();if(t==='<Show All>'&&SHOW_ALL[i])return SHOW_ALL[i];return T[t]||t}
 
   // One row of pills per RaceResult select, rebuilt only when its options change.
@@ -216,16 +219,22 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
     if(now!==sig){
       sig=now;filters.innerHTML='';
       ss.forEach(function(s,i){
+        var wrap=d.createElement('div');
+        wrap.className='rr-row';
+        var lbl=d.createElement('span');
+        lbl.className='lbl rr-lbl';lbl.textContent=GROUPS[i]||'';
         var row=d.createElement('div');
         row.className='tabs rr-tabs';row.setAttribute('role','tablist');
         row.setAttribute('aria-label',GROUPS[i]||'');
+        wrap.appendChild(lbl);wrap.appendChild(row);
         [].forEach.call(s.options,function(o){
+          if(i>0&&SKIP[o.value])return;
           var b=d.createElement('button');
           b.type='button';b.className='tab';b.setAttribute('role','tab');
           b.dataset.i=i;b.dataset.v=o.value;b.textContent=label(o.text,i);
           row.appendChild(b);
         });
-        filters.appendChild(row);
+        filters.appendChild(wrap);
       });
     }
     ss.forEach(function(s,i){
