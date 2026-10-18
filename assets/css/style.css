@@ -493,10 +493,27 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .pz li:first-child::before{color:var(--black)}
 
 /* ---------- ORGS / PARTNERS / FAQ ---------- */
-/* Organisers and partners share this row, so the column count follows however
-   many marks there are instead of stranding three in a six-up grid. */
-.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:1px;background:var(--line);
-  border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:1.4rem}
+/* Two framed groups, each under its own label: the organisers on one row,
+   then the sponsors four or five to a row, whichever fills the rows (see
+   mitrorun_partner_columns()), two on a phone. A fixed
+   count rather than auto-fit, which on a wide screen put nine marks on a line
+   and four on the next. --n is the number of marks, capped in the template, so
+   a short row never stretches thin. A part-filled last row is centred. */
+.partners{--cols:var(--n,4);display:flex;flex-wrap:wrap;justify-content:center;gap:1px;background:#fff;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:.9rem}
+.partners>*{flex:0 0 calc((100% - (var(--cols) - 1) * 1px) / var(--cols));min-width:0}
+.partners-lbl{margin-top:clamp(1.6rem,3vw,2.4rem)}
+.head + .partners-lbl{margin-top:0}
+.partners-support{--cols:2}
+@media (min-width:680px){.partners-support{--cols:var(--n,5)}}
+.partners-lead .partner{min-height:clamp(128px,13vw,200px);padding:clamp(.5rem,2vw,1.6rem)}
+.partners-lead .partner img{max-height:clamp(60px,7.5vw,104px)}
+/* The hairlines come from each tile, not from the grid showing through the gaps.
+   With the grid painted in the line colour, a last row that was not full (13
+   marks on an 8-column row, say) left solid grey blocks where tiles were
+   missing. The tile's own 1px shadow lands in the gap beside it, so cells with
+   no tile stay white, and the outer edge is clipped to the frame's border. */
+.partner{box-shadow:0 0 0 1px var(--line)}
 /* No aspect-ratio here: it gave every tile a definite height, so a short logo
    kept that height while the row grew to the tallest one, leaving the grid's
    own background showing underneath. A min-height plus the default stretch
@@ -505,8 +522,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   padding:clamp(1rem,2vw,1.6rem);font-size:.64rem;
   font-weight:600;letter-spacing:.16em;color:#B4BAB5;transition:color .35s,background .35s}
 /* Capped in absolute units. A percentage resolved against the tile's own height
-   and left tall marks free to stretch the row. */
-.partner img{max-width:100%;max-height:clamp(44px,4.6vw,68px);width:auto;height:auto;object-fit:contain;
+   and left tall marks free to stretch the row. The cap allows for marks
+   supplied on a padded 2.4:1 canvas, which carry their own breathing room. */
+.partner img{max-width:100%;max-height:clamp(56px,6vw,76px);width:auto;height:auto;object-fit:contain;
   filter:grayscale(1);opacity:.7;transition:filter .4s var(--e),opacity .4s var(--e)}
 .partner:hover img{filter:none;opacity:1}
 .partner:hover{background:var(--off);color:var(--green)}
@@ -532,6 +550,10 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .cta p{max-width:46ch;margin:0 auto 2rem;color:rgba(255,255,255,.88)}
 .cta .btn{background:#fff;color:var(--black)}
 .cta .btn:hover{background:var(--black);color:#fff}
+.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem}
+.cta .btn.ghost-d{background:rgba(10,11,10,.35);color:#fff;border-color:rgba(255,255,255,.4)}
+.cta .btn.ghost-d:hover{background:#fff;color:var(--black);border-color:#fff}
+.head-cta{margin-top:.6rem}
 .news{display:grid;gap:1.8rem;align-items:start}
 .field{display:flex;gap:.6rem;align-items:center;border:1px solid var(--line);border-radius:100px;
   padding:.4rem .4rem .4rem 1.3rem;transition:border-color .3s}
@@ -636,3 +658,90 @@ footer{background:var(--black);color:#fff;
 .mr-news-msg.ok{color:var(--green-dk)}
 .mr-news-msg.err{color:#C0392B}
 .field button[disabled]{opacity:.6;cursor:wait}
+
+/* ---------- RESULTS (RaceResult widget) ---------- */
+/* RaceResult supplies the data and the table; the site supplies everything you
+   touch. Its selects, search and PDF link are hidden and replaced by the
+   site's own .tab pills, .field and ghost button (see main.js), and the table
+   is set as a white panel in the prize panels' terms: hairline rows, the
+   winner on the green band, small spaced labels. Every rule is scoped to the
+   container id, because the widget injects its stylesheet after this one. */
+.results{background:var(--off);padding:clamp(2.4rem,5vw,4.5rem) var(--pad) clamp(4.5rem,9vw,7rem)}
+.results .wrap > p{max-width:52ch;color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem);margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+
+.rr-ui{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1rem 1.6rem;margin-bottom:1.4rem}
+.rr-ui:not(.ready){visibility:hidden}
+.rr-filters{display:grid;gap:.7rem}
+.rr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem}
+.rr-lbl{flex:0 0 7.5rem}
+.rr-tabs{margin-bottom:0}
+.rr-tabs .tab{background:#fff}
+.rr-tabs .tab.on{background:var(--green)}
+.rr-tools{display:flex;align-items:center;gap:.6rem}
+.rr-search{background:#fff;width:min(100%,340px)}
+.rr-search input::-webkit-search-cancel-button{cursor:pointer}
+.rr-pdf,.rr-photos{background:#fff;white-space:nowrap}
+.results .wrap > .rr-photos{display:none}
+
+#divRRPublish{font-family:var(--f);color:var(--black);font-size:.95rem}
+#divRRPublish *{font-family:inherit}
+#divRRPublish .ListControlPDF,
+#divRRPublish .ListControlSearch,
+#divRRPublish .RRSelectorParent,
+#divRRPublish th.sorter-false,
+#divRRPublish td.RRPStar{display:none}
+#divRRPublish .ListControl{padding:0;margin:0 0 1rem;border:0;background:none}
+/* With our controls in place the bar only ever holds RaceResult's back link,
+   which it shows when a runner's details are open. In the states where it
+   hides that link, hide the empty bar too. */
+#divRRPublish .ListControl.HasSelector,
+#divRRPublish .ListControl.OnlyOneList,
+#divRRPublish .ListControl.SearchFocus > .ListBack{display:none}
+#divRRPublish .ListBack{display:inline-flex;align-items:center;gap:.5rem;padding:.62rem 1.15rem;border-radius:100px;
+  border:1px solid var(--line);background:#fff;font-size:.75rem;font-weight:700;cursor:pointer;
+  transition:background .3s var(--e),color .3s,border-color .3s}
+#divRRPublish .ListBack:hover{background:var(--black);border-color:var(--black);color:#fff}
+
+#divRRPublish .MainDiv{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  padding:0 clamp(.6rem,2vw,1.6rem) clamp(.6rem,2vw,1.4rem)}
+#divRRPublish table.MainTable{width:100%;border-collapse:separate;border-spacing:0;background:none;
+  font-variant-numeric:tabular-nums}
+#divRRPublish table.MainTable th{background:none;color:var(--muted);font-size:.68rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;text-align:left;padding:1.4rem .8rem .8rem;border:0;border-bottom:1px solid var(--line)}
+#divRRPublish table.MainTable td{background:none;padding:1rem .8rem;border:0;border-bottom:1px solid var(--line);
+  font-size:.95rem;vertical-align:middle;transition:background .25s}
+#divRRPublish table.MainTable td.listGrouping{color:var(--black);font-size:clamp(1.35rem,2.4vw,2rem);font-weight:800;
+  letter-spacing:-.025em;text-transform:none;line-height:1;padding:clamp(1.6rem,3vw,2.4rem) .8rem 1rem}
+#divRRPublish table.MainTable tbody tr.Hover:hover td{background:var(--off)}
+
+/* Place reads like the prize panels' counters; first place takes the band. */
+#divRRPublish td.rr-pl{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+#divRRPublish tr.rr-p2 td.rr-pl,#divRRPublish tr.rr-p3 td.rr-pl{color:var(--green-dk)}
+#divRRPublish table.MainTable tr.rr-p1 td,
+#divRRPublish table.MainTable tbody tr.rr-p1.Hover:hover td{background:var(--green);color:var(--black);border-bottom-color:transparent}
+#divRRPublish table.MainTable tr.rr-p1 td.rr-pl{color:var(--black)}
+#divRRPublish table.MainTable tr.rr-p1 td:first-child{border-radius:12px 0 0 12px}
+#divRRPublish table.MainTable tr.rr-p1 td:last-child,
+#divRRPublish table.MainTable tr.rr-p1 td:nth-last-child(2):has(+ td.RRPStar){border-radius:0 12px 12px 0}
+
+/* Name and time carry the row; bib, pace and any second time are reference.
+   The roles come from each column's head (main.js), not its position. */
+#divRRPublish td.rr-bib,#divRRPublish td.rr-pace{color:var(--muted);font-size:.85rem}
+#divRRPublish td.rr-name{font-weight:600}
+#divRRPublish td.rr-time{font-size:1.05rem;font-weight:900;letter-spacing:-.03em;white-space:nowrap}
+#divRRPublish table.MainTable tr.rr-p1 td.rr-bib,
+#divRRPublish table.MainTable tr.rr-p1 td.rr-pace{color:var(--black)}
+@media (min-width:641px){
+  #divRRPublish td.rr-time{font-size:1.15rem}
+}
+@media (max-width:640px){
+  /* Grid and flex children keep their content's width unless told otherwise;
+     at 375px the search field and PDF button pushed the page to 417. */
+  .rr-ui{display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
+  .rr-ui > *,.rr-tools > *{min-width:0}
+  .rr-row{display:grid;gap:.5rem}
+  .rr-tools{display:grid;grid-template-columns:minmax(0,1fr) auto}
+  .rr-search{width:auto}
+  #divRRPublish .MainDiv{padding:0 .4rem .4rem}
+  #divRRPublish table.MainTable th,#divRRPublish table.MainTable td{padding-left:.45rem;padding-right:.45rem}
+}
