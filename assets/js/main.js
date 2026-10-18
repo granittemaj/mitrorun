@@ -169,6 +169,135 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
   });
 })();
 
+/* ================= RESULTS: RaceResult in the site's own controls ================= */
+/* RaceResult renders its widget in English with its own selects, search and
+   PDF link, and has no Albanian. Its data and behaviour stay; on top sit the
+   site's components, the .tab pills, the .field search and a ghost button,
+   each of which drives the hidden RaceResult control it replaces. The widget
+   re-renders after every change, so nothing here keeps a reference to its
+   elements: each action looks them up again, and an observer re-applies the
+   labels and the active tab whenever it redraws. */
+(function(){
+  var rr=d.getElementById('divRRPublish');
+  if(!rr)return;
+
+  var T={'5k Race':'5K Lumi','10k Race':'10K Liqeni','2k Race':'2K Shotat',
+    '<Show All>':'Të gjitha','<Overall>':'Të gjithë','Female':'Femra','Male':'Meshkuj',
+    'Pl.':'Vendi','Bib':'Nr.','Name':'Emri','Finish':'Koha','Race Pace':'Ritmi',
+    'Time':'Koha','Club':'Klubi','Nation':'Shteti','Age Group':'Grupmosha','Gender':'Gjinia'};
+  var GROUPS=['Gara','Kategoria'];
+
+  var ui=d.createElement('div');
+  ui.className='rr-ui';
+  ui.innerHTML=
+    '<div class="rr-filters"></div>'+
+    '<div class="rr-tools">'+
+      '<form class="field rr-search" role="search">'+
+        '<label class="screen-reader-text" for="rr-q">Kërko emrin ose numrin</label>'+
+        '<input id="rr-q" type="search" placeholder="Emri ose numri" autocomplete="off">'+
+        '<button class="btn sm" type="submit">Kërko</button>'+
+      '</form>'+
+      '<button class="btn ghost sm rr-pdf" type="button">Shkarko PDF</button>'+
+    '</div>';
+  rr.parentNode.insertBefore(ui,rr);
+  var filters=ui.querySelector('.rr-filters');
+
+  function selects(){return [].slice.call(rr.querySelectorAll('.RRSelectorDesktop select'))}
+  // The two RaceResult selects both offer <Show All>; it means every race in
+  // the first and both genders, grouped, in the second.
+  var SHOW_ALL=['Të gjitha garat','Sipas gjinisë'];
+  function label(t,i){t=(t||'').trim();if(t==='<Show All>'&&SHOW_ALL[i])return SHOW_ALL[i];return T[t]||t}
+
+  // One row of pills per RaceResult select, rebuilt only when its options change.
+  var sig='';
+  function buildTabs(){
+    var ss=selects();
+    var now=ss.map(function(s){return [].map.call(s.options,function(o){return o.value}).join('|')}).join('#');
+    if(now!==sig){
+      sig=now;filters.innerHTML='';
+      ss.forEach(function(s,i){
+        var row=d.createElement('div');
+        row.className='tabs rr-tabs';row.setAttribute('role','tablist');
+        row.setAttribute('aria-label',GROUPS[i]||'');
+        [].forEach.call(s.options,function(o){
+          var b=d.createElement('button');
+          b.type='button';b.className='tab';b.setAttribute('role','tab');
+          b.dataset.i=i;b.dataset.v=o.value;b.textContent=label(o.text,i);
+          row.appendChild(b);
+        });
+        filters.appendChild(row);
+      });
+    }
+    ss.forEach(function(s,i){
+      [].forEach.call(filters.querySelectorAll('.tab[data-i="'+i+'"]'),function(b){
+        var on=b.dataset.v===s.value;
+        b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');
+      });
+    });
+  }
+
+  filters.addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;
+    var s=selects()[+b.dataset.i];if(!s||s.value===b.dataset.v)return;
+    s.value=b.dataset.v;
+    s.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+
+  ui.querySelector('.rr-search').addEventListener('submit',function(e){
+    e.preventDefault();
+    var q=ui.querySelector('#rr-q').value.trim(),inp=rr.querySelector('.ListControlSearch input');
+    if(!inp)return;
+    if(!q){var c=rr.querySelector('.btnClearSearch');if(c)c.click();return}
+    inp.value=q;
+    inp.dispatchEvent(new Event('input',{bubbles:true}));
+    var go=rr.querySelector('.btnSearch');if(go){go.disabled=false;go.click()}
+  });
+  // Emptying the field brings the full list back, as clearing RaceResult's own does.
+  ui.querySelector('#rr-q').addEventListener('search',function(){
+    if(!this.value){var c=rr.querySelector('.btnClearSearch');if(c)c.click()}
+  });
+
+  ui.querySelector('.rr-pdf').addEventListener('click',function(){
+    var p=rr.querySelector('.ListControlPDF');if(p)p.click();
+  });
+
+  // Albanian labels on what RaceResult draws: column heads, group rows, back link.
+  function translate(){
+    [].forEach.call(rr.querySelectorAll('th, td.listGrouping'),function(n){
+      if(n.children.length)return;
+      var t=label(n.textContent);if(t!==n.textContent.trim())n.textContent=t;
+    });
+    // Mark the podium by the place a row actually shows, not by its position:
+    // the first row of a search result is not necessarily a winner.
+    [].forEach.call(rr.querySelectorAll('tr.Hover'),function(tr){
+      var cell=[].filter.call(tr.cells,function(c){return /^\s*\d+\.\s*$/.test(c.textContent)})[0];
+      var pl=cell?parseInt(cell.textContent,10):0;
+      if(cell&&!cell.classList.contains('rr-pl'))cell.classList.add('rr-pl');
+      [1,2,3].forEach(function(n){
+        var want=pl===n;
+        if(tr.classList.contains('rr-p'+n)!==want)tr.classList.toggle('rr-p'+n,want);
+      });
+    });
+    var back=rr.querySelector('.ListBack');
+    if(back&&back.textContent.indexOf('Kthehu')<0)back.innerHTML='<span class="ar">&larr;</span> Kthehu te lista';
+  }
+
+  var busy=false;
+  function sync(){
+    if(busy)return;busy=true;
+    try{buildTabs();translate()}finally{busy=false}
+    ui.classList.toggle('ready',selects().length>0);
+  }
+  // A short timer rather than requestAnimationFrame, which a background tab
+  // pauses: a results link opened in a new tab must be ready when it is shown.
+  var pending=0;
+  new MutationObserver(function(){
+    if(busy||pending)return;
+    pending=setTimeout(function(){pending=0;sync()},30);
+  }).observe(rr,{childList:true,subtree:true});
+  sync();
+})();
+
 /* ================= MAPS ================= */
 var START=CFG.start||[42.8901,20.8672];
 var ROUTES=CFG.routes||{};

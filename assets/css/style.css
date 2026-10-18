@@ -656,58 +656,83 @@ footer{background:var(--black);color:#fff;
 .field button[disabled]{opacity:.6;cursor:wait}
 
 /* ---------- RESULTS (RaceResult widget) ---------- */
-/* The widget brings its own stylesheet, injected after this one, so every rule
-   here is scoped to its container's id to win without !important. Only the
-   look changes: type, colour, spacing. Sorting, search and the PDF link stay
-   as RaceResult built them, and so does its phone layout: below 641px it
-   swaps the selects for its own pickers and adds a details column, and below
-   751px it folds the search into an icon, so the rules that assume the
-   desktop layout sit behind the same breakpoints. */
-.results{padding:clamp(2rem,5vw,4rem) var(--pad) clamp(4rem,8vw,6rem)}
-.results .wrap > p{max-width:62ch;color:var(--muted);margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+/* RaceResult supplies the data and the table; the site supplies everything you
+   touch. Its selects, search and PDF link are hidden and replaced by the
+   site's own .tab pills, .field and ghost button (see main.js), and the table
+   is set as a white panel in the prize panels' terms: hairline rows, the
+   winner on the green band, small spaced labels. Every rule is scoped to the
+   container id, because the widget injects its stylesheet after this one. */
+.results{background:var(--off);padding:clamp(2.4rem,5vw,4.5rem) var(--pad) clamp(4.5rem,9vw,7rem)}
+.results .wrap > p{max-width:52ch;color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem);margin-bottom:clamp(1.6rem,3vw,2.4rem)}
+
+.rr-ui{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1rem 1.6rem;margin-bottom:1.4rem}
+.rr-ui:not(.ready){visibility:hidden}
+.rr-filters{display:grid;gap:.6rem}
+.rr-tabs{margin-bottom:0}
+.rr-tabs .tab{background:#fff}
+.rr-tabs .tab.on{background:var(--green)}
+.rr-tools{display:flex;align-items:center;gap:.6rem}
+.rr-search{background:#fff;width:min(100%,340px)}
+.rr-search input::-webkit-search-cancel-button{cursor:pointer}
+.rr-pdf{background:#fff;white-space:nowrap}
+
 #divRRPublish{font-family:var(--f);color:var(--black);font-size:.95rem}
 #divRRPublish *{font-family:inherit}
-#divRRPublish .ListControl{margin-bottom:1rem}
-#divRRPublish .MainDiv{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
-#divRRPublish table.MainTable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;background:#fff}
-#divRRPublish table.MainTable th{background:var(--off);color:var(--muted);font-size:.62rem;font-weight:600;
-  letter-spacing:.16em;text-transform:uppercase;padding:.9rem .8rem;border-bottom:1px solid var(--line)}
-#divRRPublish table.MainTable td{padding:.8rem;border-bottom:1px solid var(--line)}
-#divRRPublish table.MainTable td.listGrouping{background:var(--black);color:#fff;font-size:.7rem;font-weight:800;
-  letter-spacing:.16em;text-transform:uppercase;padding:.7rem .8rem}
+#divRRPublish .ListControlPDF,
+#divRRPublish .ListControlSearch,
+#divRRPublish .RRSelectorParent,
+#divRRPublish th.sorter-false,
+#divRRPublish td.RRPStar{display:none}
+#divRRPublish .ListControl{padding:0;margin:0 0 1rem;border:0;background:none}
+/* With our controls in place the bar only ever holds RaceResult's back link,
+   which it shows when a runner's details are open. In the states where it
+   hides that link, hide the empty bar too. */
+#divRRPublish .ListControl.HasSelector,
+#divRRPublish .ListControl.OnlyOneList,
+#divRRPublish .ListControl.SearchFocus > .ListBack{display:none}
+#divRRPublish .ListBack{display:inline-flex;align-items:center;gap:.5rem;padding:.62rem 1.15rem;border-radius:100px;
+  border:1px solid var(--line);background:#fff;font-size:.75rem;font-weight:700;cursor:pointer;
+  transition:background .3s var(--e),color .3s,border-color .3s}
+#divRRPublish .ListBack:hover{background:var(--black);border-color:var(--black);color:#fff}
+
+#divRRPublish .MainDiv{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  padding:0 clamp(.6rem,2vw,1.6rem) clamp(.6rem,2vw,1.4rem)}
+#divRRPublish table.MainTable{width:100%;border-collapse:separate;border-spacing:0;background:none;
+  font-variant-numeric:tabular-nums}
+#divRRPublish table.MainTable th{background:none;color:var(--muted);font-size:.68rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;text-align:left;padding:1.4rem .8rem .8rem;border:0;border-bottom:1px solid var(--line)}
+#divRRPublish table.MainTable td{background:none;padding:1rem .8rem;border:0;border-bottom:1px solid var(--line);
+  font-size:.95rem;vertical-align:middle;transition:background .25s}
+#divRRPublish table.MainTable td.listGrouping{color:var(--black);font-size:clamp(1.35rem,2.4vw,2rem);font-weight:800;
+  letter-spacing:-.025em;text-transform:none;line-height:1;padding:clamp(1.6rem,3vw,2.4rem) .8rem 1rem}
 #divRRPublish table.MainTable tbody tr.Hover:hover td{background:var(--off)}
 
-@media (min-width:751px){
-  #divRRPublish .ListControl{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
-  #divRRPublish .ListControlPDF{font-size:.8rem;font-weight:700;color:var(--green-dk);width:auto}
-  #divRRPublish .ListControlPDF:hover{color:var(--black)}
-  #divRRPublish .ListControlSearch{align-items:center;gap:.4rem;width:auto;
-    border:1px solid var(--line);border-radius:100px;padding:.3rem .3rem .3rem .4rem;background:#fff}
-  #divRRPublish .ListControlSearch:focus-within{border-color:var(--green)}
-  #divRRPublish .ListControlSearch input{border:0;outline:0;font-size:.9rem;padding:.45rem 0 .45rem 1.8rem;width:240px;border-radius:0}
-  #divRRPublish .ListControlSearch button{border:0;border-radius:100px;cursor:pointer;width:auto}
-  #divRRPublish .ListControlSearch .btnSearch{background:var(--green);color:var(--black);font-weight:700;font-size:.75rem;padding:.55rem 1rem}
-  #divRRPublish .ListControlSearch .btnSearch[disabled]{opacity:.5;cursor:default;background:var(--green)}
-  #divRRPublish .ListControlSearch .btnClearSearch{background:var(--black);padding:.5rem .6rem;line-height:0}
-  #divRRPublish .ListControlSearch .btnFavorites{background-color:var(--off);border:0;width:2.1rem;height:2.1rem;margin:0}
-}
+/* Place reads like the prize panels' counters; first place takes the band. */
+#divRRPublish td.rr-pl{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+#divRRPublish tr.rr-p2 td.rr-pl,#divRRPublish tr.rr-p3 td.rr-pl{color:var(--green-dk)}
+#divRRPublish table.MainTable tr.rr-p1 td,
+#divRRPublish table.MainTable tbody tr.rr-p1.Hover:hover td{background:var(--green);color:var(--black);border-bottom-color:transparent}
+#divRRPublish table.MainTable tr.rr-p1 td.rr-pl{color:var(--black)}
+#divRRPublish table.MainTable tr.rr-p1 td:first-child{border-radius:12px 0 0 12px}
+#divRRPublish table.MainTable tr.rr-p1 td:last-child,
+#divRRPublish table.MainTable tr.rr-p1 td:nth-last-child(2):has(+ td.RRPStar){border-radius:0 12px 12px 0}
 
 @media (min-width:641px){
-  #divRRPublish .RRSelectorParent{margin-bottom:1rem}
-  #divRRPublish .RRSelectorDesktop{gap:.8rem;align-items:end;min-width:0}
-  #divRRPublish .RRSelectorDesktop > div{flex:0 1 260px;min-width:0;border:0;padding:0}
-  /* RaceResult floats this label inside the select, over its text; set it above. */
-  #divRRPublish .RRSelectorDesktop .hasLabel span{position:static;display:block;font-size:.62rem;font-weight:600;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
-  #divRRPublish .RRSelectorDesktop select{width:100%;font-size:.85rem;font-weight:700;color:var(--black);background-color:#fff;
-    border:1px solid var(--line);border-radius:100px;padding:.55rem 2.2rem .55rem 1rem}
-  #divRRPublish .RRSelectorDesktop select:focus{outline:2px solid var(--green);outline-offset:2px}
-  /* Name and time carry the row; place, bib and pace are reference. */
-  #divRRPublish table.MainTable td:nth-child(3){font-weight:700}
-  #divRRPublish table.MainTable td:nth-child(4){font-weight:800}
-  #divRRPublish table.MainTable td:nth-child(1),
+  /* Name and time carry the row; bib and pace are reference. */
   #divRRPublish table.MainTable td:nth-child(2),
-  #divRRPublish table.MainTable td:nth-child(5){color:var(--muted)}
-  /* The podium in each group, in the green the prize panels use. */
-  #divRRPublish table.MainTable tbody[id$="Data"] tr:nth-child(-n+3) td:nth-child(1){color:var(--green-dk);font-weight:800}
+  #divRRPublish table.MainTable td:nth-child(5){color:var(--muted);font-size:.85rem}
+  #divRRPublish table.MainTable td:nth-child(3){font-weight:600}
+  #divRRPublish table.MainTable td:nth-child(4){font-size:1.15rem;font-weight:900;letter-spacing:-.03em}
+  #divRRPublish table.MainTable tr.rr-p1 td:nth-child(2),
+  #divRRPublish table.MainTable tr.rr-p1 td:nth-child(5){color:var(--black)}
+}
+@media (max-width:640px){
+  /* Grid and flex children keep their content's width unless told otherwise;
+     at 375px the search field and PDF button pushed the page to 417. */
+  .rr-ui{display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}
+  .rr-ui > *,.rr-tools > *{min-width:0}
+  .rr-tools{display:grid;grid-template-columns:minmax(0,1fr) auto}
+  .rr-search{width:auto}
+  #divRRPublish .MainDiv{padding:0 .4rem .4rem}
+  #divRRPublish table.MainTable th,#divRRPublish table.MainTable td{padding-left:.45rem;padding-right:.45rem}
 }
