@@ -184,7 +184,17 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
   var T={'5k Race':'5K Lumi','10k Race':'10K Liqeni','2k Race':'2K Shotat',
     '<Show All>':'Të gjitha','<Overall>':'Të gjithë','Female':'Femra','Male':'Meshkuj',
     'Pl.':'Vendi','Bib':'Nr.','Name':'Emri','Finish':'Koha','Race Pace':'Ritmi',
-    'Time':'Koha','Club':'Klubi','Nation':'Shteti','Age Group':'Grupmosha','Gender':'Gjinia'};
+    'Time':'Koha','Finish Time':'Koha','Chip Time':'Koha neto','Net Time':'Koha neto',
+    'Gun Time':'Koha bruto','Gross Time':'Koha bruto','Pace':'Ritmi','Min/Km':'Ritmi',
+    'Club':'Klubi','Team':'Ekipi','Nation':'Shteti','Nat.':'Shteti',
+    'Age Group':'Grupmosha','AG':'Grupmosha','Gender':'Gjinia'};
+  // What each column is, read from its English head before it is translated.
+  // The timing company can add, drop or reorder columns while results are
+  // live (Finish Time appeared after the race), so the emphasis follows the
+  // head, never the position.
+  var ROLE={'Bib':'bib','Name':'name','Race Pace':'pace','Pace':'pace','Min/Km':'pace',
+    'Finish':'time','Finish Time':'time','Time':'time','Chip Time':'time','Net Time':'time',
+    'Gun Time':'time','Gross Time':'time'};
   var GROUPS=['Garat','Sipas gjinisë'];
 
   var ui=d.createElement('div');
@@ -201,6 +211,9 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
     '</div>';
   rr.parentNode.insertBefore(ui,rr);
   var filters=ui.querySelector('.rr-filters');
+  // The race photos button the page prints, beside the search and the PDF.
+  var photos=d.querySelector('.rr-photos');
+  if(photos)ui.querySelector('.rr-tools').appendChild(photos);
 
   function selects(){return [].slice.call(rr.querySelectorAll('.RRSelectorDesktop select'))}
   // The two RaceResult selects both offer <Show All>: every race in the first,
@@ -272,6 +285,24 @@ d.querySelectorAll('[data-count]').forEach(function(n){ci.observe(n)});
 
   // Albanian labels on what RaceResult draws: column heads, group rows, back link.
   function translate(){
+    // Roles first, from the untranslated heads, kept on the element.
+    var roles=[];
+    [].forEach.call(rr.querySelectorAll('table.MainTable thead th'),function(th,i){
+      if(!th.dataset.k)th.dataset.k=th.textContent.trim();
+      roles[i]=ROLE[th.dataset.k]||'';
+    });
+    // The first timing column is the time that matters; any others read as reference.
+    var firstTime=roles.indexOf('time');
+    [].forEach.call(rr.querySelectorAll('tr.Hover'),function(tr){
+      [].forEach.call(tr.cells,function(c,i){
+        var r=roles[i]===
+          'time'&&i!==firstTime?'pace':roles[i];
+        var want=r?'rr-'+r:'';
+        ['rr-bib','rr-name','rr-pace','rr-time'].forEach(function(k){
+          if(c.classList.contains(k)!==(k===want))c.classList.toggle(k,k===want);
+        });
+      });
+    });
     [].forEach.call(rr.querySelectorAll('th, td.listGrouping'),function(n){
       if(n.children.length)return;
       var t=label(n.textContent);if(t!==n.textContent.trim())n.textContent=t;

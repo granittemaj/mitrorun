@@ -550,6 +550,10 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .cta p{max-width:46ch;margin:0 auto 2rem;color:rgba(255,255,255,.88)}
 .cta .btn{background:#fff;color:var(--black)}
 .cta .btn:hover{background:var(--black);color:#fff}
+.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem}
+.cta .btn.ghost-d{background:rgba(10,11,10,.35);color:#fff;border-color:rgba(255,255,255,.4)}
+.cta .btn.ghost-d:hover{background:#fff;color:var(--black);border-color:#fff}
+.head-cta{margin-top:.6rem}
 .news{display:grid;gap:1.8rem;align-items:start}
 .field{display:flex;gap:.6rem;align-items:center;border:1px solid var(--line);border-radius:100px;
   padding:.4rem .4rem .4rem 1.3rem;transition:border-color .3s}
@@ -676,7 +680,8 @@ footer{background:var(--black);color:#fff;
 .rr-tools{display:flex;align-items:center;gap:.6rem}
 .rr-search{background:#fff;width:min(100%,340px)}
 .rr-search input::-webkit-search-cancel-button{cursor:pointer}
-.rr-pdf{background:#fff;white-space:nowrap}
+.rr-pdf,.rr-photos{background:#fff;white-space:nowrap}
+.results .wrap > .rr-photos{display:none}
 
 #divRRPublish{font-family:var(--f);color:var(--black);font-size:.95rem}
 #divRRPublish *{font-family:inherit}
@@ -719,14 +724,15 @@ footer{background:var(--black);color:#fff;
 #divRRPublish table.MainTable tr.rr-p1 td:last-child,
 #divRRPublish table.MainTable tr.rr-p1 td:nth-last-child(2):has(+ td.RRPStar){border-radius:0 12px 12px 0}
 
+/* Name and time carry the row; bib, pace and any second time are reference.
+   The roles come from each column's head (main.js), not its position. */
+#divRRPublish td.rr-bib,#divRRPublish td.rr-pace{color:var(--muted);font-size:.85rem}
+#divRRPublish td.rr-name{font-weight:600}
+#divRRPublish td.rr-time{font-size:1.05rem;font-weight:900;letter-spacing:-.03em;white-space:nowrap}
+#divRRPublish table.MainTable tr.rr-p1 td.rr-bib,
+#divRRPublish table.MainTable tr.rr-p1 td.rr-pace{color:var(--black)}
 @media (min-width:641px){
-  /* Name and time carry the row; bib and pace are reference. */
-  #divRRPublish table.MainTable td:nth-child(2),
-  #divRRPublish table.MainTable td:nth-child(5){color:var(--muted);font-size:.85rem}
-  #divRRPublish table.MainTable td:nth-child(3){font-weight:600}
-  #divRRPublish table.MainTable td:nth-child(4){font-size:1.15rem;font-weight:900;letter-spacing:-.03em}
-  #divRRPublish table.MainTable tr.rr-p1 td:nth-child(2),
-  #divRRPublish table.MainTable tr.rr-p1 td:nth-child(5){color:var(--black)}
+  #divRRPublish td.rr-time{font-size:1.15rem}
 }
 @media (max-width:640px){
   /* Grid and flex children keep their content's width unless told otherwise;
